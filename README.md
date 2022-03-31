@@ -3,10 +3,10 @@
 <p align="center"><b>简单易用的Spannable扩展</b></p>
 
 <p align="center">
-<a href="https://search.maven.org/artifact/com.itxca.spannablex/spannablex"><img src="https://img.shields.io/maven-central/v/com.itxca.spannablex/spannablex"/></a>
 <a href="https://github.com/TxcA/SpannableX/actions"><img src="https://github.com/TxcA/SpannableX/workflows/CI/badge.svg?branch=master&event=push"/></a>
-<img src="https://img.shields.io/badge/language-kotlin-blue.svg"/>
-<img src="https://img.shields.io/badge/license-Apache-blue"/>
+<a href="https://search.maven.org/artifact/com.itxca.spannablex/spannablex"><img src="https://img.shields.io/maven-central/v/com.itxca.spannablex/spannablex"/></a>
+<img src="https://img.shields.io/badge/language-Kotlin-blue.svg"/>
+<img src="https://img.shields.io/badge/license-Apache2.0-blue.svg"/>
 </p>
 
 
@@ -40,7 +40,7 @@
 
 - **更方便的替换规则**
 
-  支持String、正则、[ReplaceRule](https://txca.github.io/SpannableX/replace/) 及相应的Array|List 替换规则
+  支持String、正则、[ReplaceRule](https://txca.github.io/SpannableX/replace/#replacerule) 及相应的Array|List 替换规则
 
 ***更多详情参考:***
 
