@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SpannableX</string>
+    <string name="input_tip">Input \'T\' then touch the \'T\'.</string>
+</resources>

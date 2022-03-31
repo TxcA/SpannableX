@@ -1,0 +1,41 @@
+site_name: SpannableX
+site_author: TxcA
+site_description: SpannableX使用说明
+copyright: Copyright &copy; 2022 - ~ TxcA
+
+repo_name: GitHub
+repo_url: https://github.com/TxcA/SpannableX/
+
+extra_css:
+  - stylesheets/extra.css
+
+docs_dir: 'docs'
+
+theme:
+  name: material
+
+  palette:
+    scheme: TxcA
+    primary: white
+
+  font: false
+
+  language: zh
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+nav:
+  - 开始使用: index.md
+  - Kotlin DSL: dsl.md
+  - Kotlin\Java 链式: chain.md
+  - 替换规则: replace.md
+  - 辅助方法: utils.md
+  - 常用Span: spans.md
+  - 更新日志: change.md
