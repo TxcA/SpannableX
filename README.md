@@ -40,9 +40,9 @@
 
 - **更方便的替换规则**
 
-  支持String、正则、[ReplaceRule]()及相应的Array|List 替换规则
+  支持String、正则、[ReplaceRule](https://txca.github.io/SpannableX/replace/) 及相应的Array|List 替换规则
 
-*更多详情参考:*
+***更多详情参考:***
 
 **[ ⭐ 使用文档 ](https://txca.github.io/SpannableX/)**  **[ ⚙ API文档 ](https://txca.github.io/SpannableX/api/)**
 

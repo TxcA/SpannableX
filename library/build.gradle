@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.dokka'
+    id 'com.vanniktech.maven.publish'
 }
 
 android {
@@ -48,4 +49,10 @@ dependencies {
 
     // https://github.com/liangjingkanji/spannable
     api 'com.github.liangjingkanji:spannable:1.0.5'
+}
+
+plugins.withId("com.vanniktech.maven.publish") {
+    mavenPublish {
+        sonatypeHost = "S01"
+    }
 }
