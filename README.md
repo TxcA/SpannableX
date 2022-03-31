@@ -57,6 +57,7 @@
 allprojects {
     repositories {
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 ```
@@ -66,6 +67,7 @@ allprojects {
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 ```
@@ -81,9 +83,7 @@ dependencies {
 
 ### 鸣谢
 
-[@liangjingkanji](https://github.com/liangjingkanji)
-
-[spannable](https://github.com/liangjingkanji/spannable)
+[@liangjingkanji/spannable](https://github.com/liangjingkanji/spannable)
 
 ### License
 

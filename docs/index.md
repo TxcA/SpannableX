@@ -14,6 +14,7 @@
 allprojects {
     repositories {
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 ```
@@ -23,6 +24,7 @@ allprojects {
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 ```
