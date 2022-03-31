@@ -97,7 +97,6 @@ class CodeFragment : Fragment() {
             typeface = Typeface.createFromAsset(requireContext().assets, "Inconsolata-Regular.ttf")
             addTextChangedListener(afterTextChanged = ::refreshSpan)
             lifecycleScope.launch(Dispatchers.IO) {
-                delay(4000L)
                 val codeText = requireContext().assets.open("code.txt").use {
                     String(it.readBytes())
                 }
