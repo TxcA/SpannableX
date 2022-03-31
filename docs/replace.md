@@ -118,7 +118,7 @@ Span.toReplaceRule("bold")
 
 **示例**
 
-![](.\res\replace_sample.png)
+![](./res/replace_sample.png)
 
 ``` kotlin
 TextView.text = spannable {
