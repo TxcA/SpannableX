@@ -1,6 +1,6 @@
 ![](./res/logo.png)
 
-|             Code Sample              |            Kotlin            | Java                       |
+|             Code Sample              |            Kotlin            |            Java            |
 | :----------------------------------: | :--------------------------: | -------------------------- |
 | ![Gif 1.43MB](./res/sample_code.gif) | ![](./res/sample_kotlin.png) | ![](./res/sample_java.png) |
 
@@ -31,7 +31,7 @@ dependencyResolutionManagement {
 
 然后在 module 的 build.gradle 添加依赖框架
 
-```groovy
+``` groovy
 dependencies {
     // https://github.com/TxcA/SpannableX
     implementation 'com.itxca.spannablex:spannablex:1.0.0'

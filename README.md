@@ -22,7 +22,7 @@
 
 - **Kotlin DSL**
 
-  ```kotlin
+  ``` kotlin
   TextView.text = spannable {
                     "this is real text.".text()
                     "spannable".color(Color.BLUE).style(Typeface.BOLD)
@@ -31,7 +31,7 @@
 
 - **Kotlin|Java 链式**
 
-  ```java
+  ``` java
   TextView.setText(Span.create()
                     .text("this is real text.")
                     .text("spannable").color(Color.BLUE).style(Typeface.BOLD)
@@ -52,7 +52,7 @@
 
 框架存储在`mavenCentral`，大部分情况不需要手动配置，添加远程仓库根据创建项目的 Android Studio 版本有所不同。
 
-```groovy
+``` groovy
 // 项目根目录build.gradle
 allprojects {
     repositories {
@@ -62,7 +62,7 @@ allprojects {
 }
 ```
 
-```kotlin
+``` groovy
 // 项目根目录settings.gradle
 dependencyResolutionManagement {
     repositories {
@@ -74,7 +74,7 @@ dependencyResolutionManagement {
 
 然后在 module 的 build.gradle 添加依赖框架
 
-```groovy
+``` groovy
 dependencies {
     // https://github.com/TxcA/SpannableX
     implementation 'com.itxca.spannablex:spannablex:1.0.0'
