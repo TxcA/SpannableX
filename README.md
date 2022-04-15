@@ -14,7 +14,7 @@
 | :---------------------------------------: | :-------------------------------: | ------------------------------- |
 | ![Gif 1.43MB](./docs/res/sample_code.gif) | ![](./docs/res/sample_kotlin.png) | ![](./docs/res/sample_java.png) |
 
-✨ 本框架基于 ***liangjingkanji/spannable*** 驱动，此外 **新增以下特性** : 
+✨ 本框架基于 ***[@liangjingkanji/spannable](https://github.com/liangjingkanji/spannable)*** 驱动，此外 **新增以下特性** : 
 
 - **封装常用Span**
 
@@ -25,7 +25,10 @@
   ``` kotlin
   TextView.text = spannable {
                     "this is real text.".text()
-                    "spannable".color(Color.BLUE).style(Typeface.BOLD)
+                    "spannable".span {
+                        color(Color.BLUE)
+                        style(Typeface.BOLD)
+                    }
                   }
   ```
 
