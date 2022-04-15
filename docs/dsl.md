@@ -9,23 +9,31 @@
 
 ``` kotlin
 // 不携带receiver
-TextView.text = spannable{
+TextView.text = spannable {
     // 给bold text附加粗体及红色
-    "bold text".style(Typeface.BOLD).color(Color.RED)
+    // span 方法可以混合多个Span效果
+    "bold text".span {
+        style(Typeface.BOLD)
+        color(Color.RED)
+    }
     
     // 添加不带样式的real text
     "real text".text()
 }
 
 // 携带receiver
-TextView.text = "receiver".spannable{
+TextView.text = "receiver".spannable {
     // 对receiver进行spanned操作
     style(Typeface.ITALIC)
     style(Typeface.BOLD)
     color(Color.BLACK)
     
     // 对text进行spanned操作并附加在receiver后面
-    "text".style(Typeface.BOLD).color(Color.RED)
+    // span 方法可以混合多个Span效果
+    "text".span {
+        style(Typeface.BOLD)
+        color(Color.RED)
+    }
 }
 ```
 
@@ -39,7 +47,7 @@ TextView.text = "receiver".spannable{
   > 添加一段不附加效果的文本
 
   ``` kotlin
-  TextView.text = spannable{
+  TextView.text = spannable {
   	"this is real text.".text()
   }
   ```
@@ -49,11 +57,11 @@ TextView.text = "receiver".spannable{
   > 添加一个需要混合span的DSL
 
   ``` kotlin
-  TextView.text = spannable{
+  TextView.text = spannable {
   	"color text.".color(Color.RED)
   	
   	// span 方法可以混合多个Span效果
-  	"mix text.".span{
+  	"mix text.".span {
   		style(Typeface.ITALIC and Typeface.BOLD)
   		color(Color.RED)
   	}
@@ -69,7 +77,7 @@ TextView.text = "receiver".spannable{
   > 若无receiver，就直接对当前DSL内进行换行。
 
   ``` kotlin
-  TextView.text = spannable{
+  TextView.text = spannable {
   	// 在文本末尾添加换行符，并返回文本
   	"this is real text.".newline().color(Color.RED)
       
