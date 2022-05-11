@@ -34,7 +34,7 @@ dependencyResolutionManagement {
 ``` groovy
 dependencies {
     // https://github.com/TxcA/SpannableX
-    implementation 'com.itxca.spannablex:spannablex:1.0.0'
+    implementation 'com.itxca.spannablex:spannablex:1.0.2'
 }
 ```
 
