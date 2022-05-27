@@ -48,7 +48,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.6.0'
 
     // https://github.com/liangjingkanji/spannable
-    api 'com.github.liangjingkanji:spannable:1.0.5'
+    api 'com.github.liangjingkanji:spannable:1.1.2'
 }
 
 plugins.withId("com.vanniktech.maven.publish") {
