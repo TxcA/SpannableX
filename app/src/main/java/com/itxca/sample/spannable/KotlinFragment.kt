@@ -12,9 +12,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import com.drake.spannable.span.CenterImageSpan
 import com.itxca.sample.spannable.databinding.SampleFragmentBinding
 import com.itxca.spannablex.*
 import com.itxca.spannablex.utils.color
+import com.itxca.spannablex.utils.dp
 import com.itxca.spannablex.utils.drawableSize
 import com.itxca.spannablex.utils.sp
 
@@ -101,7 +103,7 @@ class KotlinFragment : Fragment() {
             "       image x".image(
                 requireContext(), R.mipmap.ic_launcher, viewBinding.tvSample, replaceRule = "x"
             )
-            image(requireContext(), R.mipmap.ic_launcher, size = 18.sp.drawableSize)
+            image(requireContext(), R.mipmap.ic_launcher, size = 18.sp.drawableSize, marginLeft = 20.dp, marginRight = 10.dp, align = CenterImageSpan.Align.BOTTOM)
             image(requireContext(), R.mipmap.ic_launcher, size = 24.sp.drawableSize)
             newline()
             "       scaleX".newline().scaleX(2.0f, "X".toReplaceRule(matchIndex = 0))

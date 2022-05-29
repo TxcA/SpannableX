@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.drake.spannable.span.CenterImageSpan;
 import com.itxca.sample.spannable.databinding.SampleFragmentBinding;
 import com.itxca.spannablex.Span;
 import com.itxca.spannablex.annotation.ConversionUnit;
@@ -45,7 +46,7 @@ public class JavaFragment extends Fragment {
         viewBinding.tvTitle.setText(Span.create()
                 .text("x SpannableX").relativeSize(1.2f)
                 .style(Typeface.BOLD)
-                .image(requireContext(), R.mipmap.ic_launcher, viewBinding.tvTitle, null, "x")
+                .image(requireContext(), R.mipmap.ic_launcher, viewBinding.tvTitle, null, null, null, null,"x")
                 .color("#ff0000", "S")
                 .color("#ffa500", "p")
                 .color("#ffff00", Span.toReplaceRule("a", false, 0))
@@ -107,9 +108,9 @@ public class JavaFragment extends Fragment {
                 )
 
                 .text("       .image() x").image(
-                        requireContext(), R.mipmap.ic_launcher, viewBinding.tvSample, null, "x"
+                        requireContext(), R.mipmap.ic_launcher, viewBinding.tvSample, null, null, null, null, "x"
                 )
-                .image(requireContext(), R.mipmap.ic_launcher, null, Span.drawableSize(18, ConversionUnit.SP))
+                .image(requireContext(), R.mipmap.ic_launcher, null, Span.drawableSize(18, ConversionUnit.SP), Span.dp(20), Span.dp(10), CenterImageSpan.Align.BOTTOM)
                 .image(requireContext(), R.mipmap.ic_launcher, null, Span.drawableSize(24, ConversionUnit.SP))
                 .newline()
                 .text("       .scaleX()").newline().scaleX(2.0f, Span.toReplaceRule("X", false, 0))
