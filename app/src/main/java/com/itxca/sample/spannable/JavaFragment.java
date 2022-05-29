@@ -111,7 +111,8 @@ public class JavaFragment extends Fragment {
                         requireContext(), R.mipmap.ic_launcher, viewBinding.tvSample, null, null, null, null, "x"
                 )
                 .image(requireContext(), R.mipmap.ic_launcher, null, Span.drawableSize(18, ConversionUnit.SP), Span.dp(20), Span.dp(10), CenterImageSpan.Align.BOTTOM)
-                .image(requireContext(), R.mipmap.ic_launcher, null, Span.drawableSize(24, ConversionUnit.SP))
+                .glide(viewBinding.tvSample, "https://www.baidu.com/img/flexible/logo/pc/result.png", null, Span.drawableSize(24, ConversionUnit.SP))
+                .glide(viewBinding.tvSample, "https://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20191213/4d10811fc6b94254a122a14f28e231d7.gif", null, Span.drawableSize(48, ConversionUnit.SP), Span.dp(20))
                 .newline()
                 .text("       .scaleX()").newline().scaleX(2.0f, Span.toReplaceRule("X", false, 0))
                 .text("       .blurMask()").newline().blurMask(5.0f)

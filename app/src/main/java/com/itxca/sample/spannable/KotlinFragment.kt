@@ -104,7 +104,8 @@ class KotlinFragment : Fragment() {
                 requireContext(), R.mipmap.ic_launcher, viewBinding.tvSample, replaceRule = "x"
             )
             image(requireContext(), R.mipmap.ic_launcher, size = 18.sp.drawableSize, marginLeft = 20.dp, marginRight = 10.dp, align = CenterImageSpan.Align.BOTTOM)
-            image(requireContext(), R.mipmap.ic_launcher, size = 24.sp.drawableSize)
+            glide(viewBinding.tvSample, "https://www.baidu.com/img/flexible/logo/pc/result.png", size = 24.sp.drawableSize)
+            glide(viewBinding.tvSample, "https://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20191213/4d10811fc6b94254a122a14f28e231d7.gif", size = 48.sp.drawableSize, marginLeft = 20.dp)
             newline()
             "       scaleX".newline().scaleX(2.0f, "X".toReplaceRule(matchIndex = 0))
             "       blurMask".newline().blurMask(5.0f)
