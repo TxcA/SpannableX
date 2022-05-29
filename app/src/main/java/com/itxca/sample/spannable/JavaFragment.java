@@ -87,7 +87,7 @@ public class JavaFragment extends Fragment {
                 .style(Typeface.BOLD, "Span.create()")
                 .color(Color.BLACK, "Span.create()")
                 .newline()
-                .text("       .style()").newline().style(Typeface.BOLD | Typeface.ITALIC)
+                .text("       .style()").newline().style(Typeface.BOLD_ITALIC)
                 .text("       .typeface()").newline().typeface(
                         Typeface.createFromAsset(requireContext().getAssets(), "Inconsolata-Regular.ttf"),
                         null, Utils.getUnSpaceRegex()
@@ -133,7 +133,7 @@ public class JavaFragment extends Fragment {
                 .text("       .clickable()").clickable(
                         Color.BLUE,
                         null,
-                        Typeface.BOLD | Typeface.ITALIC,
+                        Typeface.BOLD_ITALIC,
                         null,
                         null,
                         (v, matchText) ->

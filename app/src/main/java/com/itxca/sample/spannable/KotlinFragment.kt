@@ -80,7 +80,7 @@ class KotlinFragment : Fragment() {
             color(Color.BLACK, "spannable {")
 
             newline()
-            "       style".newline().style(Typeface.BOLD or Typeface.ITALIC)
+            "       style".newline().style(Typeface.BOLD_ITALIC)
             "       typeface".newline().typeface(
                 Typeface.createFromAsset(requireContext().assets, "Inconsolata-Regular.ttf"),
                 replaceRule = unSpaceRegex
@@ -126,7 +126,7 @@ class KotlinFragment : Fragment() {
             }
             "       clickable".clickable(
                 color = Color.BLUE,
-                typeStyle = Typeface.BOLD or Typeface.ITALIC
+                typeStyle = Typeface.BOLD_ITALIC
             ) { _, matchText ->
                 toast("点击: $matchText")
             }
