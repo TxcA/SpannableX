@@ -34,11 +34,11 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
 import com.drake.spannable.replaceSpan
 import com.drake.spannable.setSpan
+import com.drake.spannable.span.CenterImageSpan
 import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
 import com.itxca.spannablex.span.SimpleClickableConfig
 import com.itxca.spannablex.span.SimpleClickableSpan
-import com.itxca.spannablex.span.SizeImageSpan
 import com.itxca.spannablex.utils.DrawableSize
 import com.itxca.spannablex.utils.color
 import com.itxca.spannablex.utils.textSizeInt
@@ -60,18 +60,32 @@ private const val UNKNOWN_REPLACE_RULES =
     "Unknown replace rules. please use `String(list/array)`, `Regex(list/array)`, `ReplaceRule(list/array)`."
 
 /**
- * [SizeImageSpan] 适配 [Drawable] size
+ * [CenterImageSpan] 适配 [Drawable] size
  */
-private fun SizeImageSpan.setupSize(
+private fun CenterImageSpan.setupSize(
     useTextViewSize: TextView?,
     size: DrawableSize?
-): SizeImageSpan = apply {
+): CenterImageSpan = apply {
     useTextViewSize?.textSizeInt?.let { textSize ->
-        drawableSize(textSize, textSize)
+        setDrawableSize(textSize, textSize)
     } ?: size?.let { drawableSize ->
-        drawableSize(drawableSize.width, drawableSize.height)
+        setDrawableSize(drawableSize.width, drawableSize.height)
     }
 }
+
+/**
+ * [CenterImageSpan] 适配 [Drawable] margin
+ * 这里多做判断，是防止[CenterImageSpan.setMarginHorizontal] 做多余的`drawableRef?.clear()`
+ */
+private fun CenterImageSpan.setupMarginHorizontal(
+    left: Int?,
+    right: Int?
+): CenterImageSpan = apply {
+    if (left != null || right != null) {
+        setMarginHorizontal(left ?: 0, right ?: 0)
+    }
+}
+
 
 /**
  * 适配[setSpan] 的返回值为 [Spannable], 以便进行plus操作
@@ -283,17 +297,20 @@ internal fun CharSequence.spanBackground(
 }
 
 /**
- * [SizeImageSpan] 图片
+ * [CenterImageSpan] 图片
  */
 internal fun spanImage(
     drawable: Drawable,
     source: String? = null,
     useTextViewSize: TextView? = null,
-    size: DrawableSize? = null
-): Spannable = IMAGE_SPAN_TAG.spanImage(drawable, source, useTextViewSize, size)
+    size: DrawableSize? = null,
+    marginLeft: Int? = null,
+    marginRight: Int? = null,
+    align: CenterImageSpan.Align,
+): Spannable = IMAGE_SPAN_TAG.spanImage(drawable, source, useTextViewSize, size, marginLeft, marginRight, align)
 
 /**
- * [SizeImageSpan] 图片
+ * [CenterImageSpan] 图片
  *
  * @param replaceRule [ReplaceRule] 替换规则
  */
@@ -302,25 +319,33 @@ internal fun CharSequence.spanImage(
     source: String? = null,
     useTextViewSize: TextView? = null,
     size: DrawableSize? = null,
-    replaceRule: Any? = null
+    marginLeft: Int? = null,
+    marginRight: Int? = null,
+    align: CenterImageSpan.Align,
+    replaceRule: Any? = null,
 ): Spannable = setOrReplaceSpan(replaceRule) {
     (source?.let {
-        SizeImageSpan(drawable, it)
-    } ?: SizeImageSpan(drawable)).setupSize(useTextViewSize, size)
+        CenterImageSpan(drawable, it)
+    } ?: CenterImageSpan(drawable)).setupSize(useTextViewSize, size)
+        .setupMarginHorizontal(marginLeft, marginRight)
+        .setAlign(align)
 }
 
 /**
- * [SizeImageSpan] 图片
+ * [CenterImageSpan] 图片
  */
 internal fun spanImage(
     context: Context,
     uri: Uri,
     useTextViewSize: TextView? = null,
     size: DrawableSize? = null,
-): Spannable = IMAGE_SPAN_TAG.spanImage(context, uri, useTextViewSize, size)
+    marginLeft: Int? = null,
+    marginRight: Int? = null,
+    align: CenterImageSpan.Align,
+): Spannable = IMAGE_SPAN_TAG.spanImage(context, uri, useTextViewSize, size, marginLeft, marginRight, align)
 
 /**
- * [SizeImageSpan] 图片
+ * [CenterImageSpan] 图片
  *
  * @param replaceRule [ReplaceRule] 替换规则
  */
@@ -329,23 +354,31 @@ internal fun CharSequence.spanImage(
     uri: Uri,
     useTextViewSize: TextView? = null,
     size: DrawableSize? = null,
+    marginLeft: Int? = null,
+    marginRight: Int? = null,
+    align: CenterImageSpan.Align,
     replaceRule: Any? = null
 ): Spannable = setOrReplaceSpan(replaceRule) {
-    SizeImageSpan(context, uri).setupSize(useTextViewSize, size)
+    CenterImageSpan(context, uri).setupSize(useTextViewSize, size)
+        .setupMarginHorizontal(marginLeft, marginRight)
+        .setAlign(align)
 }
 
 /**
- * [SizeImageSpan] 图片
+ * [CenterImageSpan] 图片
  */
 internal fun spanImage(
     context: Context,
     @DrawableRes resourceId: Int,
     useTextViewSize: TextView? = null,
     size: DrawableSize? = null,
-): Spannable = IMAGE_SPAN_TAG.spanImage(context, resourceId, useTextViewSize, size)
+    marginLeft: Int? = null,
+    marginRight: Int? = null,
+    align: CenterImageSpan.Align,
+): Spannable = IMAGE_SPAN_TAG.spanImage(context, resourceId, useTextViewSize, size, marginLeft, marginRight, align)
 
 /**
- * [SizeImageSpan] 图片
+ * [CenterImageSpan] 图片
  *
  * @param replaceRule [ReplaceRule] 替换规则
  */
@@ -354,23 +387,31 @@ internal fun CharSequence.spanImage(
     @DrawableRes resourceId: Int,
     useTextViewSize: TextView? = null,
     size: DrawableSize? = null,
+    marginLeft: Int? = null,
+    marginRight: Int? = null,
+    align: CenterImageSpan.Align,
     replaceRule: Any? = null,
 ): Spannable = setOrReplaceSpan(replaceRule) {
-    SizeImageSpan(context, resourceId).setupSize(useTextViewSize, size)
+    CenterImageSpan(context, resourceId).setupSize(useTextViewSize, size)
+        .setupMarginHorizontal(marginLeft,marginRight)
+        .setAlign(align)
 }
 
 /**
- * [SizeImageSpan] 图片
+ * [CenterImageSpan] 图片
  */
 internal fun spanImage(
     context: Context,
     bitmap: Bitmap,
     useTextViewSize: TextView? = null,
+    marginLeft: Int? = null,
+    marginRight: Int? = null,
     size: DrawableSize? = null,
-): Spannable = IMAGE_SPAN_TAG.spanImage(context, bitmap, useTextViewSize, size)
+    align: CenterImageSpan.Align,
+): Spannable = IMAGE_SPAN_TAG.spanImage(context, bitmap, useTextViewSize, size, marginLeft, marginRight, align)
 
 /**
- * [SizeImageSpan] 图片
+ * [CenterImageSpan] 图片
  *
  * @param replaceRule [ReplaceRule] 替换规则
  */
@@ -379,9 +420,14 @@ internal fun CharSequence.spanImage(
     bitmap: Bitmap,
     useTextViewSize: TextView? = null,
     size: DrawableSize? = null,
+    marginLeft: Int? = null,
+    marginRight: Int? = null,
+    align: CenterImageSpan.Align,
     replaceRule: Any? = null,
 ): Spannable = setOrReplaceSpan(replaceRule) {
-    SizeImageSpan(context, bitmap).setupSize(useTextViewSize, size)
+    CenterImageSpan(context, bitmap).setupSize(useTextViewSize, size)
+        .setupMarginHorizontal(marginLeft,marginRight)
+        .setAlign(align)
 }
 
 /**

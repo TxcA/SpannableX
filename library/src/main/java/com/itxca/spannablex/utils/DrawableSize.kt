@@ -21,10 +21,10 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.IntRange
 import androidx.annotation.Keep
-import com.itxca.spannablex.span.SizeImageSpan
+import com.drake.spannable.span.CenterImageSpan
 
 /**
- * [SizeImageSpan] 的大小配置辅助类
+ * [CenterImageSpan] 的大小配置辅助类
  */
 @Keep
 data class DrawableSize(

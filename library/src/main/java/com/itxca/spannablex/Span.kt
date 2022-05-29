@@ -33,6 +33,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
 import androidx.core.text.buildSpannedString
+import com.drake.spannable.span.CenterImageSpan
 import com.itxca.spannablex.annotation.ConversionUnit
 import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
@@ -206,10 +207,13 @@ class Span private constructor() {
         source: String? = null,
         useTextViewSize: TextView? = null,
         size: DrawableSize? = null,
+        marginLeft: Int? = null,
+        marginRight: Int? = null,
+        align: CenterImageSpan.Align? = null,
         replaceRule: Any? = null,
     ): Span = runOnSelf {
         checkImageSpan(replaceRule == null)
-        spannableCache?.spanImage(drawable, source, useTextViewSize, size, replaceRule)
+        spannableCache?.spanImage(drawable, source, useTextViewSize, size, marginLeft, marginRight, align ?: CenterImageSpan.Align.CENTER, replaceRule)
     }
 
     /**
@@ -221,10 +225,13 @@ class Span private constructor() {
         uri: Uri,
         useTextViewSize: TextView? = null,
         size: DrawableSize? = null,
+        marginLeft: Int? = null,
+        marginRight: Int? = null,
+        align: CenterImageSpan.Align? = null,
         replaceRule: Any? = null,
     ): Span = runOnSelf {
         checkImageSpan(replaceRule == null)
-        spannableCache?.spanImage(context, uri, useTextViewSize, size, replaceRule)
+        spannableCache?.spanImage(context, uri, useTextViewSize, size, marginLeft, marginRight, align ?: CenterImageSpan.Align.CENTER, replaceRule)
     }
 
     /**
@@ -236,10 +243,13 @@ class Span private constructor() {
         @DrawableRes resourceId: Int,
         useTextViewSize: TextView? = null,
         size: DrawableSize? = null,
+        marginLeft: Int? = null,
+        marginRight: Int? = null,
+        align: CenterImageSpan.Align? = null,
         replaceRule: Any? = null,
     ): Span = runOnSelf {
         checkImageSpan(replaceRule == null)
-        spannableCache?.spanImage(context, resourceId, useTextViewSize, size, replaceRule)
+        spannableCache?.spanImage(context, resourceId, useTextViewSize, size, marginLeft, marginRight, align ?: CenterImageSpan.Align.CENTER, replaceRule)
     }
 
     /**
@@ -251,10 +261,13 @@ class Span private constructor() {
         bitmap: Bitmap,
         useTextViewSize: TextView? = null,
         size: DrawableSize? = null,
+        marginLeft: Int? = null,
+        marginRight: Int? = null,
+        align: CenterImageSpan.Align? = null,
         replaceRule: Any? = null,
     ): Span = runOnSelf {
         checkImageSpan(replaceRule == null)
-        spannableCache?.spanImage(context, bitmap, useTextViewSize, size, replaceRule)
+        spannableCache?.spanImage(context, bitmap, useTextViewSize, size, marginLeft, marginRight, align ?: CenterImageSpan.Align.CENTER, replaceRule)
     }
 
     /**

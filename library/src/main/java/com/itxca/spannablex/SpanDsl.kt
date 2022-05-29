@@ -32,11 +32,11 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
+import com.drake.spannable.span.CenterImageSpan
 import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
 import com.itxca.spannablex.span.SimpleClickableConfig
 import com.itxca.spannablex.span.SimpleClickableSpan
-import com.itxca.spannablex.span.SizeImageSpan
 import com.itxca.spannablex.utils.DrawableSize
 import java.util.*
 
@@ -111,9 +111,9 @@ class SpanDsl private constructor(
      * 换行(可自行处理`\n`)
      */
     fun <T> T?.newline(@androidx.annotation.IntRange(from = 1L) lines: Int = 1): CharSequence? = kotlin.run {
-        val newlines = if (lines > 1){
+        val newlines = if (lines > 1) {
             buildString {
-                repeat(lines){ append("\n") }
+                repeat(lines) { append("\n") }
             }
         } else "\n"
         when (this) {
@@ -220,7 +220,7 @@ class SpanDsl private constructor(
     ) = singleSpan { spanBackground(color, replaceRule ?: globalReplaceRule) }
 
     /**
-     * [SizeImageSpan] 图片
+     * [CenterImageSpan] 图片
      * @see [CharSequence.image]
      *
      * @param replaceRule [ReplaceRule] 替换规则
@@ -230,13 +230,16 @@ class SpanDsl private constructor(
         source: String? = null,
         useTextViewSize: TextView? = null,
         size: DrawableSize? = null,
+        marginLeft: Int? = null,
+        marginRight: Int? = null,
+        align: CenterImageSpan.Align = CenterImageSpan.Align.CENTER,
         replaceRule: Any? = null,
     ) = singleSpan(replaceRule == null) {
-        spanImage(drawable, source, useTextViewSize, size, replaceRule ?: globalReplaceRule)
+        spanImage(drawable, source, useTextViewSize, size, marginLeft, marginRight, align, replaceRule ?: globalReplaceRule)
     }
 
     /**
-     * [SizeImageSpan] 图片
+     * [CenterImageSpan] 图片
      * @see [CharSequence.image]
      *
      * @param replaceRule [ReplaceRule] 替换规则
@@ -246,13 +249,16 @@ class SpanDsl private constructor(
         uri: Uri,
         useTextViewSize: TextView? = null,
         size: DrawableSize? = null,
+        marginLeft: Int? = null,
+        marginRight: Int? = null,
+        align: CenterImageSpan.Align = CenterImageSpan.Align.CENTER,
         replaceRule: Any? = null,
     ) = singleSpan(replaceRule == null) {
-        spanImage(context, uri, useTextViewSize, size, replaceRule ?: globalReplaceRule)
+        spanImage(context, uri, useTextViewSize, size, marginLeft, marginRight, align, replaceRule ?: globalReplaceRule)
     }
 
     /**
-     * [SizeImageSpan] 图片
+     * [CenterImageSpan] 图片
      * @see [CharSequence.image]
      *
      * @param replaceRule [ReplaceRule] 替换规则
@@ -262,13 +268,16 @@ class SpanDsl private constructor(
         @DrawableRes resourceId: Int,
         useTextViewSize: TextView? = null,
         size: DrawableSize? = null,
+        marginLeft: Int? = null,
+        marginRight: Int? = null,
+        align: CenterImageSpan.Align = CenterImageSpan.Align.CENTER,
         replaceRule: Any? = null,
     ) = singleSpan(replaceRule == null) {
-        spanImage(context, resourceId, useTextViewSize, size, replaceRule ?: globalReplaceRule)
+        spanImage(context, resourceId, useTextViewSize, size, marginLeft, marginRight, align, replaceRule ?: globalReplaceRule)
     }
 
     /**
-     * [SizeImageSpan] 图片
+     * [CenterImageSpan] 图片
      * @see [CharSequence.image]
      *
      * @param replaceRule [ReplaceRule] 替换规则
@@ -278,9 +287,12 @@ class SpanDsl private constructor(
         bitmap: Bitmap,
         useTextViewSize: TextView? = null,
         size: DrawableSize? = null,
+        marginLeft: Int? = null,
+        marginRight: Int? = null,
+        align: CenterImageSpan.Align = CenterImageSpan.Align.CENTER,
         replaceRule: Any? = null,
     ) = singleSpan(replaceRule == null) {
-        spanImage(context, bitmap, useTextViewSize, size, replaceRule ?: globalReplaceRule)
+        spanImage(context, bitmap, useTextViewSize, size, marginLeft, marginRight, align, replaceRule ?: globalReplaceRule)
     }
 
     /**
