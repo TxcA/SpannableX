@@ -32,9 +32,11 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
+import com.bumptech.glide.request.RequestOptions
 import com.drake.spannable.replaceSpan
 import com.drake.spannable.setSpan
 import com.drake.spannable.span.CenterImageSpan
+import com.drake.spannable.span.GlideImageSpan
 import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
 import com.itxca.spannablex.span.SimpleClickableConfig
@@ -79,13 +81,39 @@ private fun CenterImageSpan.setupSize(
  */
 private fun CenterImageSpan.setupMarginHorizontal(
     left: Int?,
-    right: Int?
+    right: Int? = left
 ): CenterImageSpan = apply {
     if (left != null || right != null) {
         setMarginHorizontal(left ?: 0, right ?: 0)
     }
 }
 
+/**
+ * [GlideImageSpan] 适配 [Drawable] size
+ */
+private fun GlideImageSpan.setupSize(
+    useTextViewSize: TextView?,
+    size: DrawableSize?
+): GlideImageSpan = apply {
+    useTextViewSize?.textSizeInt?.let { textSize ->
+        setDrawableSize(textSize, textSize)
+    } ?: size?.let { drawableSize ->
+        setDrawableSize(drawableSize.width, drawableSize.height)
+    }
+}
+
+/**
+ * [GlideImageSpan] 适配 [Drawable] margin
+ * 这里多做判断，是防止[CenterImageSpan.setMarginHorizontal] 做多余的`drawableRef?.clear()`
+ */
+private fun GlideImageSpan.setupMarginHorizontal(
+    left: Int?,
+    right: Int? = left
+): GlideImageSpan = apply {
+    if (left != null || right != null) {
+        setMarginHorizontal(left ?: 0, right ?: 0)
+    }
+}
 
 /**
  * 适配[setSpan] 的返回值为 [Spannable], 以便进行plus操作
@@ -428,6 +456,47 @@ internal fun CharSequence.spanImage(
     CenterImageSpan(context, bitmap).setupSize(useTextViewSize, size)
         .setupMarginHorizontal(marginLeft,marginRight)
         .setAlign(align)
+}
+
+/**
+ * [GlideImageSpan] 图片
+ */
+internal fun spanGlide(
+    view: TextView,
+    url: Any,
+    useTextViewSize: TextView? = null,
+    marginLeft: Int? = null,
+    marginRight: Int? = null,
+    size: DrawableSize? = null,
+    align: GlideImageSpan.Align,
+    loopCount: Int? = null,
+    requestOption: RequestOptions? = null
+): Spannable = IMAGE_SPAN_TAG.spanGlide(view, url, useTextViewSize, size, marginLeft, marginRight, align, loopCount, requestOption)
+
+/**
+ * [GlideImageSpan] 图片
+ *
+ * @param replaceRule [ReplaceRule] 替换规则
+ */
+internal fun CharSequence.spanGlide(
+    view: TextView,
+    url: Any,
+    useTextViewSize: TextView? = null,
+    size: DrawableSize? = null,
+    marginLeft: Int? = null,
+    marginRight: Int? = null,
+    align: GlideImageSpan.Align,
+    loopCount: Int? = null,
+    requestOption: RequestOptions? = null,
+    replaceRule: Any? = null,
+): Spannable = setOrReplaceSpan(replaceRule) {
+    GlideImageSpan(view, url).setupSize(useTextViewSize, size)
+        .setupMarginHorizontal(marginLeft,marginRight)
+        .setAlign(align)
+        .apply {
+            loopCount?.let(::setLoopCount)
+            requestOption?.let(::setRequestOption)
+        }
 }
 
 /**

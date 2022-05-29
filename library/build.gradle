@@ -49,6 +49,8 @@ dependencies {
 
     // https://github.com/liangjingkanji/spannable
     api 'com.github.liangjingkanji:spannable:1.1.2'
+
+    compileOnly libs.glide
 }
 
 plugins.withId("com.vanniktech.maven.publish") {

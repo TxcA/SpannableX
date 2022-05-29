@@ -5,12 +5,19 @@ pluginManagement {
         mavenCentral()
     }
 }
+
 dependencyResolutionManagement {
+    enableFeaturePreview('VERSION_CATALOGS')
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+    }
+    versionCatalogs {
+        libs {
+            alias('glide').to('com.github.bumptech.glide:glide:4.13.1')
+        }
     }
 }
 

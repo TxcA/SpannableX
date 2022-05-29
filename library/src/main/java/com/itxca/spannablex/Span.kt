@@ -33,7 +33,9 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
 import androidx.core.text.buildSpannedString
+import com.bumptech.glide.request.RequestOptions
 import com.drake.spannable.span.CenterImageSpan
+import com.drake.spannable.span.GlideImageSpan
 import com.itxca.spannablex.annotation.ConversionUnit
 import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
@@ -268,6 +270,26 @@ class Span private constructor() {
     ): Span = runOnSelf {
         checkImageSpan(replaceRule == null)
         spannableCache?.spanImage(context, bitmap, useTextViewSize, size, marginLeft, marginRight, align ?: CenterImageSpan.Align.CENTER, replaceRule)
+    }
+
+    /**
+     * @see [CharSequence.spanGlide]
+     */
+    @JvmOverloads
+    fun glide(
+        view: TextView,
+        url: Any,
+        useTextViewSize: TextView? = null,
+        size: DrawableSize? = null,
+        marginLeft: Int? = null,
+        marginRight: Int? = null,
+        align: GlideImageSpan.Align? = null,
+        loopCount: Int? = null,
+        requestOption: RequestOptions? = null,
+        replaceRule: Any? = null,
+    ): Span = runOnSelf {
+        checkImageSpan(replaceRule == null)
+        spannableCache?.spanGlide(view, url, useTextViewSize, size, marginLeft, marginRight, align ?: GlideImageSpan.Align.CENTER, loopCount, requestOption, replaceRule)
     }
 
     /**

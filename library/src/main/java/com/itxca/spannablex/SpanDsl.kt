@@ -32,7 +32,9 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
+import com.bumptech.glide.request.RequestOptions
 import com.drake.spannable.span.CenterImageSpan
+import com.drake.spannable.span.GlideImageSpan
 import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
 import com.itxca.spannablex.span.SimpleClickableConfig
@@ -293,6 +295,27 @@ class SpanDsl private constructor(
         replaceRule: Any? = null,
     ) = singleSpan(replaceRule == null) {
         spanImage(context, bitmap, useTextViewSize, size, marginLeft, marginRight, align, replaceRule ?: globalReplaceRule)
+    }
+
+    /**
+     * [GlideImageSpan] 图片
+     * @see [CharSequence.image]
+     *
+     * @param replaceRule [ReplaceRule] 替换规则
+     */
+    fun Any?.glide(
+        view: TextView,
+        url: Any,
+        useTextViewSize: TextView? = null,
+        size: DrawableSize? = null,
+        marginLeft: Int? = null,
+        marginRight: Int? = null,
+        align: GlideImageSpan.Align = GlideImageSpan.Align.CENTER,
+        loopCount: Int? = null,
+        requestOption: RequestOptions? = null,
+        replaceRule: Any? = null,
+    ) = singleSpan(replaceRule == null) {
+        spanGlide(view, url, useTextViewSize, size, marginLeft, marginRight, align, loopCount, requestOption, replaceRule ?: globalReplaceRule)
     }
 
     /**
