@@ -81,7 +81,7 @@ private fun CenterImageSpan.setupSize(
  */
 private fun CenterImageSpan.setupMarginHorizontal(
     left: Int?,
-    right: Int? = left
+    right: Int?
 ): CenterImageSpan = apply {
     if (left != null || right != null) {
         setMarginHorizontal(left ?: 0, right ?: 0)
@@ -104,11 +104,11 @@ private fun GlideImageSpan.setupSize(
 
 /**
  * [GlideImageSpan] 适配 [Drawable] margin
- * 这里多做判断，是防止[CenterImageSpan.setMarginHorizontal] 做多余的`drawableRef?.clear()`
+ * 这里多做判断，是防止[CenterImageSpan.setMarginHorizontal] 做多余的`drawableRef?.set(null)`
  */
 private fun GlideImageSpan.setupMarginHorizontal(
     left: Int?,
-    right: Int? = left
+    right: Int?
 ): GlideImageSpan = apply {
     if (left != null || right != null) {
         setMarginHorizontal(left ?: 0, right ?: 0)
@@ -242,7 +242,7 @@ private fun CharSequence.setOrReplaceSpan(
  */
 internal fun CharSequence.spanStyle(
     @TextStyle style: Int,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     StyleSpan(style)
 }
@@ -251,9 +251,9 @@ internal fun CharSequence.spanStyle(
  * [TypefaceSpan] 设置字体样式
  */
 internal fun CharSequence.spanTypeface(
-    typeface: Typeface? = null,
-    family: String? = null,
-    replaceRule: Any? = null
+    typeface: Typeface?,
+    family: String?,
+    replaceRule: Any?
 ): Spannable = (if (typeface != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
     TypefaceSpan(typeface)
 } else TypefaceSpan(family)).let { typefaceSpan ->
@@ -268,10 +268,10 @@ internal fun CharSequence.spanTypeface(
 internal fun CharSequence.spanTextAppearance(
     @TextStyle style: Int = Typeface.NORMAL,
     size: Int = -1,
-    @ColorInt color: Int? = null,
-    family: String? = null,
-    linkColor: ColorStateList? = null,
-    replaceRule: Any? = null
+    @ColorInt color: Int?,
+    family: String?,
+    linkColor: ColorStateList?,
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     TextAppearanceSpan(family, style, size, color?.let(ColorStateList::valueOf), linkColor)
 }
@@ -283,7 +283,7 @@ internal fun CharSequence.spanTextAppearance(
  */
 internal fun CharSequence.spanColor(
     colorString: String,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     ForegroundColorSpan(colorString.color)
 }
@@ -295,7 +295,7 @@ internal fun CharSequence.spanColor(
  */
 internal fun CharSequence.spanColor(
     @ColorInt color: Int,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     ForegroundColorSpan(color)
 }
@@ -307,7 +307,7 @@ internal fun CharSequence.spanColor(
  */
 internal fun CharSequence.spanBackground(
     colorString: String,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     BackgroundColorSpan(Color.parseColor(colorString))
 }
@@ -319,23 +319,10 @@ internal fun CharSequence.spanBackground(
  */
 internal fun CharSequence.spanBackground(
     @ColorInt color: Int,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     BackgroundColorSpan(color)
 }
-
-/**
- * [CenterImageSpan] 图片
- */
-internal fun spanImage(
-    drawable: Drawable,
-    source: String? = null,
-    useTextViewSize: TextView? = null,
-    size: DrawableSize? = null,
-    marginLeft: Int? = null,
-    marginRight: Int? = null,
-    align: CenterImageSpan.Align,
-): Spannable = IMAGE_SPAN_TAG.spanImage(drawable, source, useTextViewSize, size, marginLeft, marginRight, align)
 
 /**
  * [CenterImageSpan] 图片
@@ -344,13 +331,13 @@ internal fun spanImage(
  */
 internal fun CharSequence.spanImage(
     drawable: Drawable,
-    source: String? = null,
-    useTextViewSize: TextView? = null,
-    size: DrawableSize? = null,
-    marginLeft: Int? = null,
-    marginRight: Int? = null,
+    source: String?,
+    useTextViewSize: TextView?,
+    size: DrawableSize?,
+    marginLeft: Int?,
+    marginRight: Int?,
     align: CenterImageSpan.Align,
-    replaceRule: Any? = null,
+    replaceRule: Any?,
 ): Spannable = setOrReplaceSpan(replaceRule) {
     (source?.let {
         CenterImageSpan(drawable, it)
@@ -361,31 +348,18 @@ internal fun CharSequence.spanImage(
 
 /**
  * [CenterImageSpan] 图片
- */
-internal fun spanImage(
-    context: Context,
-    uri: Uri,
-    useTextViewSize: TextView? = null,
-    size: DrawableSize? = null,
-    marginLeft: Int? = null,
-    marginRight: Int? = null,
-    align: CenterImageSpan.Align,
-): Spannable = IMAGE_SPAN_TAG.spanImage(context, uri, useTextViewSize, size, marginLeft, marginRight, align)
-
-/**
- * [CenterImageSpan] 图片
  *
  * @param replaceRule [ReplaceRule] 替换规则
  */
 internal fun CharSequence.spanImage(
     context: Context,
     uri: Uri,
-    useTextViewSize: TextView? = null,
-    size: DrawableSize? = null,
-    marginLeft: Int? = null,
-    marginRight: Int? = null,
+    useTextViewSize: TextView?,
+    size: DrawableSize?,
+    marginLeft: Int?,
+    marginRight: Int?,
     align: CenterImageSpan.Align,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     CenterImageSpan(context, uri).setupSize(useTextViewSize, size)
         .setupMarginHorizontal(marginLeft, marginRight)
@@ -394,31 +368,18 @@ internal fun CharSequence.spanImage(
 
 /**
  * [CenterImageSpan] 图片
- */
-internal fun spanImage(
-    context: Context,
-    @DrawableRes resourceId: Int,
-    useTextViewSize: TextView? = null,
-    size: DrawableSize? = null,
-    marginLeft: Int? = null,
-    marginRight: Int? = null,
-    align: CenterImageSpan.Align,
-): Spannable = IMAGE_SPAN_TAG.spanImage(context, resourceId, useTextViewSize, size, marginLeft, marginRight, align)
-
-/**
- * [CenterImageSpan] 图片
  *
  * @param replaceRule [ReplaceRule] 替换规则
  */
 internal fun CharSequence.spanImage(
     context: Context,
     @DrawableRes resourceId: Int,
-    useTextViewSize: TextView? = null,
-    size: DrawableSize? = null,
-    marginLeft: Int? = null,
-    marginRight: Int? = null,
+    useTextViewSize: TextView?,
+    size: DrawableSize?,
+    marginLeft: Int?,
+    marginRight: Int?,
     align: CenterImageSpan.Align,
-    replaceRule: Any? = null,
+    replaceRule: Any?,
 ): Spannable = setOrReplaceSpan(replaceRule) {
     CenterImageSpan(context, resourceId).setupSize(useTextViewSize, size)
         .setupMarginHorizontal(marginLeft,marginRight)
@@ -427,51 +388,23 @@ internal fun CharSequence.spanImage(
 
 /**
  * [CenterImageSpan] 图片
- */
-internal fun spanImage(
-    context: Context,
-    bitmap: Bitmap,
-    useTextViewSize: TextView? = null,
-    marginLeft: Int? = null,
-    marginRight: Int? = null,
-    size: DrawableSize? = null,
-    align: CenterImageSpan.Align,
-): Spannable = IMAGE_SPAN_TAG.spanImage(context, bitmap, useTextViewSize, size, marginLeft, marginRight, align)
-
-/**
- * [CenterImageSpan] 图片
  *
  * @param replaceRule [ReplaceRule] 替换规则
  */
 internal fun CharSequence.spanImage(
     context: Context,
     bitmap: Bitmap,
-    useTextViewSize: TextView? = null,
-    size: DrawableSize? = null,
-    marginLeft: Int? = null,
-    marginRight: Int? = null,
+    useTextViewSize: TextView?,
+    size: DrawableSize?,
+    marginLeft: Int?,
+    marginRight: Int?,
     align: CenterImageSpan.Align,
-    replaceRule: Any? = null,
+    replaceRule: Any?,
 ): Spannable = setOrReplaceSpan(replaceRule) {
     CenterImageSpan(context, bitmap).setupSize(useTextViewSize, size)
         .setupMarginHorizontal(marginLeft,marginRight)
         .setAlign(align)
 }
-
-/**
- * [GlideImageSpan] 图片
- */
-internal fun spanGlide(
-    view: TextView,
-    url: Any,
-    useTextViewSize: TextView? = null,
-    marginLeft: Int? = null,
-    marginRight: Int? = null,
-    size: DrawableSize? = null,
-    align: GlideImageSpan.Align,
-    loopCount: Int? = null,
-    requestOption: RequestOptions? = null
-): Spannable = IMAGE_SPAN_TAG.spanGlide(view, url, useTextViewSize, size, marginLeft, marginRight, align, loopCount, requestOption)
 
 /**
  * [GlideImageSpan] 图片
@@ -481,14 +414,14 @@ internal fun spanGlide(
 internal fun CharSequence.spanGlide(
     view: TextView,
     url: Any,
-    useTextViewSize: TextView? = null,
-    size: DrawableSize? = null,
-    marginLeft: Int? = null,
-    marginRight: Int? = null,
+    useTextViewSize: TextView?,
+    size: DrawableSize?,
+    marginLeft: Int?,
+    marginRight: Int?,
     align: GlideImageSpan.Align,
-    loopCount: Int? = null,
-    requestOption: RequestOptions? = null,
-    replaceRule: Any? = null,
+    loopCount: Int?,
+    requestOption: RequestOptions?,
+    replaceRule: Any?,
 ): Spannable = setOrReplaceSpan(replaceRule) {
     GlideImageSpan(view, url).setupSize(useTextViewSize, size)
         .setupMarginHorizontal(marginLeft,marginRight)
@@ -506,7 +439,7 @@ internal fun CharSequence.spanGlide(
  */
 internal fun CharSequence.spanScaleX(
     @FloatRange(from = 0.0) proportion: Float,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     ScaleXSpan(proportion)
 }
@@ -518,7 +451,7 @@ internal fun CharSequence.spanScaleX(
  */
 internal fun CharSequence.spanMaskFilter(
     filter: MaskFilter,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     MaskFilterSpan(filter)
 }
@@ -530,8 +463,8 @@ internal fun CharSequence.spanMaskFilter(
  */
 internal fun CharSequence.spanBlurMask(
     @FloatRange(from = 0.0) radius: Float,
-    style: BlurMaskFilter.Blur? = null,
-    replaceRule: Any? = null
+    style: BlurMaskFilter.Blur?,
+    replaceRule: Any?
 ): Spannable =
     spanMaskFilter(BlurMaskFilter(radius, style ?: BlurMaskFilter.Blur.NORMAL), replaceRule)
 
@@ -541,7 +474,7 @@ internal fun CharSequence.spanBlurMask(
  * @param replaceRule [ReplaceRule] 替换规则
  */
 internal fun CharSequence.spanSuperscript(
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     SuperscriptSpan()
 }
@@ -552,7 +485,7 @@ internal fun CharSequence.spanSuperscript(
  * @param replaceRule [ReplaceRule] 替换规则
  */
 internal fun CharSequence.spanSubscript(
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     SubscriptSpan()
 }
@@ -565,7 +498,7 @@ internal fun CharSequence.spanSubscript(
 internal fun CharSequence.spanAbsoluteSize(
     size: Int,
     dip: Boolean = true,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     AbsoluteSizeSpan(size, dip)
 }
@@ -577,7 +510,7 @@ internal fun CharSequence.spanAbsoluteSize(
  */
 internal fun CharSequence.spanRelativeSize(
     @FloatRange(from = 0.0) proportion: Float,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     RelativeSizeSpan(proportion)
 }
@@ -588,7 +521,7 @@ internal fun CharSequence.spanRelativeSize(
  * @param replaceRule [ReplaceRule] 替换规则
  */
 internal fun CharSequence.spanStrikethrough(
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     StrikethroughSpan()
 }
@@ -599,7 +532,7 @@ internal fun CharSequence.spanStrikethrough(
  * @param replaceRule [ReplaceRule] 替换规则
  */
 internal fun CharSequence.spanUnderline(
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     UnderlineSpan()
 }
@@ -612,7 +545,7 @@ internal fun CharSequence.spanUnderline(
  */
 internal fun CharSequence.spanURL(
     url: String,
-    replaceRule: Any? = null
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     URLSpan(url)
 }
@@ -626,9 +559,9 @@ internal fun CharSequence.spanSuggestion(
     context: Context,
     suggestions: Array<String>,
     flags: Int = SuggestionSpan.SUGGESTIONS_MAX_SIZE,
-    locale: Locale? = null,
-    notificationTargetClass: Class<*>? = null,
-    replaceRule: Any? = null
+    locale: Locale?,
+    notificationTargetClass: Class<*>?,
+    replaceRule: Any?
 ): Spannable = setOrReplaceSpan(replaceRule) {
     SuggestionSpan(context, locale, suggestions, flags, notificationTargetClass)
 }
@@ -640,12 +573,12 @@ internal fun CharSequence.spanSuggestion(
  * @param onClick [OnSpanClickListener] 点击回调
  */
 internal fun CharSequence.spanClickable(
-    @ColorInt color: Int? = null,
-    @ColorInt backgroundColor: Int? = null,
-    @TextStyle typeStyle: Int? = null,
-    config: SimpleClickableConfig? = null,
-    replaceRule: Any? = null,
-    onClick: OnSpanClickListener? = null
+    @ColorInt color: Int?,
+    @ColorInt backgroundColor: Int?,
+    @TextStyle typeStyle: Int?,
+    config: SimpleClickableConfig?,
+    replaceRule: Any?,
+    onClick: OnSpanClickListener?
 ): Spannable = setOrReplaceSpan(replaceRule) { matchText ->
     SimpleClickableSpan(color, backgroundColor, typeStyle, config) {
         onClick?.onClick(it, matchText)
