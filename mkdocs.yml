@@ -37,5 +37,6 @@ nav:
   - Kotlin\Java 链式: chain.md
   - 替换规则: replace.md
   - 辅助方法: utils.md
+  - 图片加载: image.md
   - 常用Span: spans.md
   - 更新日志: change.md

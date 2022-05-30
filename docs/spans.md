@@ -30,7 +30,8 @@ TextView.text = spannable {
 | textAppearance() | 设置字体效果         | TextAppearanceSpan      |
 | color()          | 文本颜色             | ForegroundColorSpan     |
 | background()     | 背景颜色             | BackgroundColorSpan     |
-| image()          | 图片                 | SizeImageSpan           |
+| image()          | 图片                 | CenterImageSpan           |
+| glide()          | Glide加载图片        | GlideImageSpan           |
 | scaleX()         | X轴文本缩放          | ScaleXSpan              |
 | maskFilter()     | 文本蒙版效果         | MaskFilterSpan          |
 | blurMask()       | 文本模糊滤镜蒙版效果 | BlurMaskFilter          |
@@ -46,5 +47,7 @@ TextView.text = spannable {
 
 
 ## 其它说明
+
+**👉 本地、网络、Gif图片加载:** [图片加载](https://txca.github.io/SpannableX/image/)
 
 **👉 替换规则(DSL、链式通用):** [替换规则](https://txca.github.io/SpannableX/replace/)
