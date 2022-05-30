@@ -83,7 +83,7 @@ dependencies {
     implementation 'com.itxca.spannablex:spannablex:1.0.3'
 
     // 若需使用glide()方法加载网络图片或Gif, 需同时引入Glide
-    implementation com.github.bumptech.glide:glide:4.13.1
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
 }
 ```
 
