@@ -47,7 +47,7 @@
 
 ***更多详情参考:***
 
-**[ ⭐ 使用文档 ](https://txca.github.io/SpannableX/)**  **[ ⚙ API文档 ](https://txca.github.io/SpannableX/api/)**
+**[ ⭐ 使用文档 ](https://txca.github.io/SpannableX/)**  **[ ⚙ API文档 ](https://txca.github.io/SpannableX/api/)**  **[ 🔨 更新日志](https://txca.github.io/SpannableX/change/)**
 
 ---
 
