@@ -38,6 +38,8 @@ android {
         suppressObviousFunctions.set(true)
         dokkaSourceSets {
             configureEach {
+                noStdlibLink.set(true)
+                noJdkLink.set(true)
                 noAndroidSdkLink.set(true)
             }
         }
