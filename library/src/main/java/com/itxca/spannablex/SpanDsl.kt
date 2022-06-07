@@ -19,10 +19,7 @@ package com.itxca.spannablex
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Bitmap
-import android.graphics.BlurMaskFilter
-import android.graphics.MaskFilter
-import android.graphics.Typeface
+import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.text.Layout
@@ -36,6 +33,7 @@ import androidx.annotation.IntRange
 import com.bumptech.glide.request.RequestOptions
 import com.drake.spannable.span.CenterImageSpan
 import com.drake.spannable.span.GlideImageSpan
+import com.drake.spannable.span.MarginSpan
 import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
 import com.itxca.spannablex.span.*
@@ -581,6 +579,36 @@ class SpanDsl private constructor(
             replaceRule ?: globalReplaceRule,
             onClick
         )
+    }
+
+    /**
+     * [MarginSpan] 设置文本间距
+     *
+     * @param width 文本间距
+     * @param color 间距填充颜色
+     * @param replaceRule 组合替换规则 [String] [Regex] [ReplaceRule]
+     */
+    fun Any?.margin(
+        @Px width: Int,
+        @ColorInt color: Int = Color.TRANSPARENT,
+        replaceRule: Any? = null
+    ) = singleSpan(replaceRule == null) {
+        spanMargin(width, color, replaceRule)
+    }
+
+    /**
+     * [MarginSpan] 设置文本间距
+     *
+     * @param width 文本间距
+     * @param colorString 间距填充颜色 #RRGGBB #AARRGGBB
+     * @param replaceRule 组合替换规则 [String] [Regex] [ReplaceRule]
+     */
+    fun Any?.margin(
+        @Px width: Int,
+        colorString: String,
+        replaceRule: Any? = null
+    ) = singleSpan(replaceRule == null) {
+        spanMargin(width, colorString.color, replaceRule)
     }
 
     /**

@@ -40,6 +40,7 @@ import com.drake.spannable.replaceSpan
 import com.drake.spannable.setSpan
 import com.drake.spannable.span.CenterImageSpan
 import com.drake.spannable.span.GlideImageSpan
+import com.drake.spannable.span.MarginSpan
 import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
 import com.itxca.spannablex.span.*
@@ -280,7 +281,7 @@ internal fun CharSequence.spanTypeface(
 }
 
 /**
- * [TextAppearanceSpan] 设置字体效果spanTypeface
+ * [TextAppearanceSpan] 设置字体效果
  *
  * @param style 文本样式 [Typeface.NORMAL] [Typeface.BOLD] [Typeface.ITALIC] [Typeface.BOLD_ITALIC]
  * @param size 文本大小
@@ -637,6 +638,21 @@ internal fun CharSequence.spanClickable(
     SimpleClickableSpan(color, backgroundColor, style, config) {
         onClick?.onClick(it, matchText)
     }
+}
+
+/**
+ * [MarginSpan] 设置文本间距
+ *
+ * @param width 文本间距
+ * @param color 间距填充颜色
+ * @param replaceRule 组合替换规则 [String] [Regex] [ReplaceRule]
+ */
+internal fun CharSequence.spanMargin(
+    @Px width: Int,
+    @ColorInt color: Int,
+    replaceRule: Any?
+): Spannable = setOrReplaceSpan(replaceRule) {
+    MarginSpan(width, color)
 }
 
 /**

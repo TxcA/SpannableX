@@ -20,10 +20,7 @@ package com.itxca.spannablex
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Bitmap
-import android.graphics.BlurMaskFilter
-import android.graphics.MaskFilter
-import android.graphics.Typeface
+import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.text.*
@@ -37,6 +34,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.drake.spannable.movement.ClickableMovementMethod
 import com.drake.spannable.span.CenterImageSpan
 import com.drake.spannable.span.GlideImageSpan
+import com.drake.spannable.span.MarginSpan
 import com.itxca.spannablex.annotation.ConversionUnit
 import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
@@ -583,6 +581,40 @@ class Span private constructor() {
             replaceRule,
             onClick
         )
+    }
+
+    /**
+     * [MarginSpan] 设置文本间距
+     *
+     * @param width 文本间距
+     * @param color 间距填充颜色
+     * @param replaceRule 组合替换规则 [String] [Regex] [ReplaceRule]
+     */
+    @JvmOverloads
+    fun margin(
+        @Px width: Int,
+        @ColorInt color: Int = Color.TRANSPARENT,
+        replaceRule: Any? = null
+    ): Span = runOnSelf {
+        checkImageSpan(replaceRule == null)
+        spannableCache?.spanMargin(width, color, replaceRule)
+    }
+
+    /**
+     * [MarginSpan] 设置文本间距
+     *
+     * @param width 文本间距
+     * @param colorString 间距填充颜色 #RRGGBB #AARRGGBB
+     * @param replaceRule 组合替换规则 [String] [Regex] [ReplaceRule]
+     */
+    @JvmOverloads
+    fun margin(
+        @Px width: Int,
+        colorString: String?,
+        replaceRule: Any? = null
+    ): Span = runOnSelf {
+        checkImageSpan(replaceRule == null)
+        spannableCache?.spanMargin(width, colorString?.takeIf(String::isNotBlank)?.color ?: Color.TRANSPARENT, replaceRule)
     }
 
     /**
