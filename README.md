@@ -80,7 +80,7 @@ dependencyResolutionManagement {
 ``` groovy
 dependencies {
     // https://github.com/TxcA/SpannableX
-    implementation 'com.itxca.spannablex:spannablex:1.0.3'
+    implementation 'com.itxca.spannablex:spannablex:1.0.4'
 
     // 若需使用glide()方法加载网络图片或Gif, 需同时引入Glide
     implementation 'com.github.bumptech.glide:glide:4.13.1'
