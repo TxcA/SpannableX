@@ -2,7 +2,7 @@
 
 |             Code Sample              |            Kotlin            |            Java            |
 | :----------------------------------: | :--------------------------: | -------------------------- |
-| ![Gif 1.43MB](./res/sample_code.gif) | ![](./res/sample_kotlin.png) | ![](./res/sample_java.png) |
+| ![Gif 1.43MB](./res/sample_code.gif) | ![](./res/sample_kotlin.jpg) | ![](./res/sample_java.jpg) |
 
 
 ## 集成
@@ -49,7 +49,10 @@ dependencies {
   ``` kotlin
   TextView.text = spannable {
                     "this is real text.".text()
-                    "spannable".color(Color.BLUE).style(Typeface.BOLD)
+                    "spannable".span {
+                        color(Color.BLUE)
+                        style(Typeface.BOLD)
+                    }
                   }
   ```
 
