@@ -24,14 +24,14 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
+import android.text.Layout
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.*
 import android.util.Log
 import android.widget.TextView
-import androidx.annotation.ColorInt
-import androidx.annotation.DrawableRes
-import androidx.annotation.FloatRange
+import androidx.annotation.*
+import androidx.annotation.IntRange
 import com.bumptech.glide.request.RequestOptions
 import com.drake.spannable.replaceSpan
 import com.drake.spannable.setSpan
@@ -39,12 +39,18 @@ import com.drake.spannable.span.CenterImageSpan
 import com.drake.spannable.span.GlideImageSpan
 import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
-import com.itxca.spannablex.span.SimpleClickableConfig
-import com.itxca.spannablex.span.SimpleClickableSpan
+import com.itxca.spannablex.span.*
+import com.itxca.spannablex.span.LeadingMarginSpan
+import com.itxca.spannablex.span.legacy.LegacyBulletSpan
+import com.itxca.spannablex.span.legacy.LegacyLineBackgroundSpan
+import com.itxca.spannablex.span.legacy.LegacyLineHeightSpan
+import com.itxca.spannablex.span.legacy.LegacyQuoteSpan
 import com.itxca.spannablex.utils.DrawableSize
 import com.itxca.spannablex.utils.color
+import com.itxca.spannablex.utils.drawableSize
 import com.itxca.spannablex.utils.textSizeInt
 import java.util.*
+
 
 //<editor-fold desc="日志">
 internal fun Throwable.logW(message: String? = null) {
@@ -130,7 +136,7 @@ private fun CharSequence.spanReplace(
 
 private fun CharSequence.replaceRegexList(
     ruleList: List<Regex>,
-    createWhat: (matchText: String) -> CharacterStyle
+    createWhat: (matchText: String) -> Any
 ): Spannable? {
     var span: CharSequence? = null
     ruleList.forEach { replace ->
@@ -143,7 +149,7 @@ private fun CharSequence.replaceRegexList(
 
 private fun CharSequence.replaceReplaceRuleList(
     ruleList: List<ReplaceRule>,
-    createWhat: (matchText: String) -> CharacterStyle
+    createWhat: (matchText: String) -> Any
 ): Spannable? {
     var span: CharSequence? = null
     ruleList.forEach { replace ->
@@ -166,9 +172,8 @@ private fun CharSequence.replaceReplaceRuleList(
 @Suppress("UNCHECKED_CAST")
 private fun CharSequence.setOrReplaceSpan(
     replaceRule: Any?,
-    createWhat: (matchText: String) -> CharacterStyle
+    createWhat: (matchText: String) -> Any
 ): Spannable = replaceRule?.let { rule ->
-
     when (rule) {
         //<editor-fold desc="String | Regex | ReplaceRule">
         is String -> spanReplace(Regex.escape(rule).toRegex()) {
@@ -382,7 +387,7 @@ internal fun CharSequence.spanImage(
     replaceRule: Any?,
 ): Spannable = setOrReplaceSpan(replaceRule) {
     CenterImageSpan(context, resourceId).setupSize(useTextViewSize, size)
-        .setupMarginHorizontal(marginLeft,marginRight)
+        .setupMarginHorizontal(marginLeft, marginRight)
         .setAlign(align)
 }
 
@@ -402,7 +407,7 @@ internal fun CharSequence.spanImage(
     replaceRule: Any?,
 ): Spannable = setOrReplaceSpan(replaceRule) {
     CenterImageSpan(context, bitmap).setupSize(useTextViewSize, size)
-        .setupMarginHorizontal(marginLeft,marginRight)
+        .setupMarginHorizontal(marginLeft, marginRight)
         .setAlign(align)
 }
 
@@ -424,7 +429,7 @@ internal fun CharSequence.spanGlide(
     replaceRule: Any?,
 ): Spannable = setOrReplaceSpan(replaceRule) {
     GlideImageSpan(view, url).setupSize(useTextViewSize, size)
-        .setupMarginHorizontal(marginLeft,marginRight)
+        .setupMarginHorizontal(marginLeft, marginRight)
         .setAlign(align)
         .apply {
             loopCount?.let(::setLoopCount)
@@ -585,4 +590,103 @@ internal fun CharSequence.spanClickable(
     }
 }
 
+/**
+ * [QuoteSpan] 设置段落引用样式
+ */
+internal fun CharSequence.spanQuote(
+    @ColorInt color: Int,
+    @Px @IntRange(from = 0) stripeWidth: Int,
+    @Px @IntRange(from = 0) gapWidth: Int,
+): Spannable = setOrReplaceSpan(null) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        QuoteSpan(color, stripeWidth, gapWidth)
+    } else {
+        LegacyQuoteSpan(color, stripeWidth, gapWidth)
+    }
+}
+
+/**
+ * [BulletSpan] 设置段落圆形标识
+ */
+internal fun CharSequence.spanBullet(
+    @ColorInt color: Int,
+    @Px @IntRange(from = 0) bulletRadius: Int,
+    @Px gapWidth: Int,
+): Spannable = setOrReplaceSpan(null) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        BulletSpan(gapWidth, color, bulletRadius)
+    } else {
+        LegacyBulletSpan(color, bulletRadius, gapWidth)
+    }
+}
+
+/**
+ * [AlignmentSpan] 设置段落对齐方式
+ */
+internal fun CharSequence.spanAlignment(
+    align: Layout.Alignment
+): Spannable = setOrReplaceSpan(null) {
+    AlignmentSpan.Standard(align)
+}
+
+/**
+ * [LineBackgroundSpan] 设置段落背景颜色
+ */
+internal fun CharSequence.spanLineBackground(
+    @ColorInt color: Int
+): Spannable = setOrReplaceSpan(null) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        LineBackgroundSpan.Standard(color)
+    } else {
+        LegacyLineBackgroundSpan(color)
+    }
+}
+
+/**
+ * [LeadingMarginSpan] 设置段落文本缩进
+ */
+internal fun CharSequence.spanLeadingMargin(
+    @IntRange(from = 1L) firstLines: Int,
+    @Px firstMargin: Int,
+    @Px restMargin: Int
+): Spannable = setOrReplaceSpan(null) {
+    LeadingMarginSpan(firstLines, firstMargin, restMargin)
+}
+
+/**
+ * [LineHeightSpan] 设置段落行高
+ */
+internal fun CharSequence.spanLineHeight(
+    @Px @IntRange(from = 1L) height: Int
+): Spannable = setOrReplaceSpan(null) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        LineHeightSpan.Standard(height)
+    } else {
+        LegacyLineHeightSpan(height)
+    }
+}
+
+/**
+ * [ParagraphBitmapSpan] 设置段落图片
+ */
+internal fun CharSequence.spanImageParagraph(
+    bitmap: Bitmap,
+    @Px padding: Int,
+    useTextViewSize: TextView?,
+    size: DrawableSize?
+): Spannable = setOrReplaceSpan(null) {
+    ParagraphBitmapSpan(bitmap, useTextViewSize?.textSizeInt?.drawableSize ?: size, padding)
+}
+
+/**
+ * [ParagraphDrawableSpan] 设置段落图片
+ */
+internal fun CharSequence.spanImageParagraph(
+    drawable: Drawable,
+    @Px padding: Int,
+    useTextViewSize: TextView?,
+    size: DrawableSize?
+): Spannable = setOrReplaceSpan(null) {
+    ParagraphDrawableSpan(drawable, useTextViewSize?.textSizeInt?.drawableSize ?: size, padding)
+}
 //</editor-fold>

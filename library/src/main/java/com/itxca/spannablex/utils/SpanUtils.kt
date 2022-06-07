@@ -20,6 +20,7 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.core.graphics.toColorInt
 import kotlin.math.roundToInt
 
 /**
@@ -28,19 +29,19 @@ import kotlin.math.roundToInt
  */
 val String.color: Int
     get() = try {
-        Color.parseColor(this)
+        toColorInt()
     } catch (e: Exception) {
         Color.RED
     }
 
 /**
- * @receiver to dp
+ * @receiver dp 2 px
  */
 val Int.dp: Int
     get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).roundToInt()
 
 /**
- * @receiver to sp
+ * @receiver sp 2 px
  */
 val Int.sp: Int
     get() = (this * Resources.getSystem().displayMetrics.scaledDensity + 0.5f).roundToInt()

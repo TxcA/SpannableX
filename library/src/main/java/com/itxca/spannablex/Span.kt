@@ -29,9 +29,8 @@ import android.net.Uri
 import android.text.*
 import android.text.style.SuggestionSpan
 import android.widget.TextView
-import androidx.annotation.ColorInt
-import androidx.annotation.DrawableRes
-import androidx.annotation.FloatRange
+import androidx.annotation.*
+import androidx.annotation.IntRange
 import androidx.core.text.buildSpannedString
 import com.bumptech.glide.request.RequestOptions
 import com.drake.spannable.span.CenterImageSpan
@@ -41,10 +40,7 @@ import com.itxca.spannablex.annotation.TextStyle
 import com.itxca.spannablex.interfaces.OnSpanClickListener
 import com.itxca.spannablex.interfaces.OnSpanReplacementMatch
 import com.itxca.spannablex.span.SimpleClickableConfig
-import com.itxca.spannablex.utils.DrawableSize
-import com.itxca.spannablex.utils.dp
-import com.itxca.spannablex.utils.drawableSize
-import com.itxca.spannablex.utils.sp
+import com.itxca.spannablex.utils.*
 import java.util.*
 
 /**
@@ -215,7 +211,16 @@ class Span private constructor() {
         replaceRule: Any? = null,
     ): Span = runOnSelf {
         checkImageSpan(replaceRule == null)
-        spannableCache?.spanImage(drawable, source, useTextViewSize, size, marginLeft, marginRight, align ?: CenterImageSpan.Align.CENTER, replaceRule)
+        spannableCache?.spanImage(
+            drawable,
+            source,
+            useTextViewSize,
+            size,
+            marginLeft,
+            marginRight,
+            align ?: CenterImageSpan.Align.CENTER,
+            replaceRule
+        )
     }
 
     /**
@@ -233,7 +238,16 @@ class Span private constructor() {
         replaceRule: Any? = null,
     ): Span = runOnSelf {
         checkImageSpan(replaceRule == null)
-        spannableCache?.spanImage(context, uri, useTextViewSize, size, marginLeft, marginRight, align ?: CenterImageSpan.Align.CENTER, replaceRule)
+        spannableCache?.spanImage(
+            context,
+            uri,
+            useTextViewSize,
+            size,
+            marginLeft,
+            marginRight,
+            align ?: CenterImageSpan.Align.CENTER,
+            replaceRule
+        )
     }
 
     /**
@@ -251,7 +265,16 @@ class Span private constructor() {
         replaceRule: Any? = null,
     ): Span = runOnSelf {
         checkImageSpan(replaceRule == null)
-        spannableCache?.spanImage(context, resourceId, useTextViewSize, size, marginLeft, marginRight, align ?: CenterImageSpan.Align.CENTER, replaceRule)
+        spannableCache?.spanImage(
+            context,
+            resourceId,
+            useTextViewSize,
+            size,
+            marginLeft,
+            marginRight,
+            align ?: CenterImageSpan.Align.CENTER,
+            replaceRule
+        )
     }
 
     /**
@@ -269,7 +292,16 @@ class Span private constructor() {
         replaceRule: Any? = null,
     ): Span = runOnSelf {
         checkImageSpan(replaceRule == null)
-        spannableCache?.spanImage(context, bitmap, useTextViewSize, size, marginLeft, marginRight, align ?: CenterImageSpan.Align.CENTER, replaceRule)
+        spannableCache?.spanImage(
+            context,
+            bitmap,
+            useTextViewSize,
+            size,
+            marginLeft,
+            marginRight,
+            align ?: CenterImageSpan.Align.CENTER,
+            replaceRule
+        )
     }
 
     /**
@@ -289,7 +321,18 @@ class Span private constructor() {
         replaceRule: Any? = null,
     ): Span = runOnSelf {
         checkImageSpan(replaceRule == null)
-        spannableCache?.spanGlide(view, url, useTextViewSize, size, marginLeft, marginRight, align ?: GlideImageSpan.Align.CENTER, loopCount, requestOption, replaceRule)
+        spannableCache?.spanGlide(
+            view,
+            url,
+            useTextViewSize,
+            size,
+            marginLeft,
+            marginRight,
+            align ?: GlideImageSpan.Align.CENTER,
+            loopCount,
+            requestOption,
+            replaceRule
+        )
     }
 
     /**
@@ -425,6 +468,95 @@ class Span private constructor() {
         )
     }
 
+    @JvmOverloads
+    fun quote(
+        colorString: String,
+        @IntRange(from = 0) stripeWidth: Int = 10,
+        @IntRange(from = 0) gapWidth: Int = 0
+    ): Span = runOnSelf {
+        spannableCache?.spanQuote(colorString.color, stripeWidth, gapWidth)
+    }
+
+    @JvmOverloads
+    fun quote(
+        @ColorInt color: Int,
+        @Px @IntRange(from = 0) stripeWidth: Int = 10,
+        @Px @IntRange(from = 0) gapWidth: Int = 0
+    ): Span = runOnSelf {
+        spannableCache?.spanQuote(color, stripeWidth, gapWidth)
+    }
+
+    @JvmOverloads
+    fun bullet(
+        colorString: String,
+        @Px @IntRange(from = 0) bulletRadius: Int,
+        @Px gapWidth: Int = 0,
+    ): Span = runOnSelf {
+        spannableCache?.spanBullet(colorString.color, bulletRadius, gapWidth)
+    }
+
+    @JvmOverloads
+    fun bullet(
+        @ColorInt color: Int,
+        @Px @IntRange(from = 0) bulletRadius: Int,
+        @Px gapWidth: Int = 0,
+    ): Span = runOnSelf {
+        spannableCache?.spanBullet(color, bulletRadius, gapWidth)
+    }
+
+    fun alignment(
+        align: Layout.Alignment
+    ): Span = runOnSelf {
+        spannableCache?.spanAlignment(align)
+    }
+
+    fun lineBackground(
+        @ColorInt color: Int
+    ): Span = runOnSelf {
+        spannableCache?.spanLineBackground(color)
+    }
+
+    fun lineBackground(
+        colorString: String
+    ): Span = runOnSelf {
+        spannableCache?.spanLineBackground(colorString.color)
+    }
+
+    @JvmOverloads
+    fun leadingMargin(
+        @IntRange(from = 1L) firstLines: Int,
+        @Px firstMargin: Int,
+        @Px restMargin: Int = 0
+    ): Span = runOnSelf {
+        spannableCache?.spanLeadingMargin(firstLines, firstMargin, restMargin)
+    }
+
+    fun lineHeight(
+        @Px @IntRange(from = 1L) height: Int
+    ): Span = runOnSelf {
+        spannableCache?.spanLineHeight(height)
+    }
+
+    @JvmOverloads
+    fun imageParagraph(
+        bitmap: Bitmap,
+        @Px padding: Int = 0,
+        useTextViewSize: TextView? = null,
+        size: DrawableSize? = null
+    ): Span = runOnSelf {
+        spannableCache?.spanImageParagraph(bitmap, padding, useTextViewSize, size)
+    }
+
+    @JvmOverloads
+    fun imageParagraph(
+        drawable: Drawable,
+        @Px padding: Int = 0,
+        useTextViewSize: TextView? = null,
+        size: DrawableSize? = null
+    ): Span = runOnSelf {
+        spannableCache?.spanImageParagraph(drawable, padding, useTextViewSize, size)
+    }
+
     companion object {
         /**
          * 构建Span
@@ -453,7 +585,7 @@ class Span private constructor() {
             replaceString: String,
             isRegex: Boolean = false,
             matchIndex: Int? = null,
-            matchRange: IntRange? = null,
+            matchRange: kotlin.ranges.IntRange? = null,
             newString: CharSequence? = null,
             replacementMatch: OnSpanReplacementMatch? = null
         ): ReplaceRule =

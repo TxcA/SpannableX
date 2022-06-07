@@ -24,14 +24,14 @@ import android.graphics.MaskFilter
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.text.Layout
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.SpannedString
 import android.text.style.*
 import android.widget.TextView
-import androidx.annotation.ColorInt
-import androidx.annotation.DrawableRes
-import androidx.annotation.FloatRange
+import androidx.annotation.*
+import androidx.annotation.IntRange
 import com.bumptech.glide.request.RequestOptions
 import com.drake.spannable.span.CenterImageSpan
 import com.drake.spannable.span.GlideImageSpan
@@ -40,6 +40,7 @@ import com.itxca.spannablex.interfaces.OnSpanClickListener
 import com.itxca.spannablex.span.SimpleClickableConfig
 import com.itxca.spannablex.span.SimpleClickableSpan
 import com.itxca.spannablex.utils.DrawableSize
+import com.itxca.spannablex.utils.color
 import java.util.*
 
 /**
@@ -104,6 +105,13 @@ class SpanDsl private constructor(
      * 为 @receiver 设置多个Span
      */
     fun CharSequence?.span(replaceRule: Any? = null, span: SpanDsl.() -> Unit = {}) {
+        mixed(replaceRule, span)
+    }
+
+    /**
+     * 为 @receiver 设置多个Span
+     */
+    fun CharSequence?.mixed(replaceRule: Any? = null, span: SpanDsl.() -> Unit = {}) {
         spannableBuilder.append(
             create(this, replaceRule ?: globalReplaceRule).apply(span).spannable()
         )
@@ -112,23 +120,24 @@ class SpanDsl private constructor(
     /**
      * 换行(可自行处理`\n`)
      */
-    fun <T> T?.newline(@androidx.annotation.IntRange(from = 1L) lines: Int = 1): CharSequence? = kotlin.run {
-        val newlines = if (lines > 1) {
-            buildString {
-                repeat(lines) { append("\n") }
-            }
-        } else "\n"
-        when (this) {
-            is SpannableStringBuilder -> append(newlines)
-            is Spanned -> SpannableStringBuilder(this).append(newlines)
-            is String -> "${this}$newlines"
-            is CharSequence -> "${this}$newlines"
-            else -> {
-                spannableBuilder.append(newlines)
-                null
+    fun <T> T?.newline(@androidx.annotation.IntRange(from = 1L) lines: Int = 1): CharSequence? =
+        kotlin.run {
+            val newlines = if (lines > 1) {
+                buildString {
+                    repeat(lines) { append("\n") }
+                }
+            } else "\n"
+            when (this) {
+                is SpannableStringBuilder -> append(newlines)
+                is Spanned -> SpannableStringBuilder(this).append(newlines)
+                is String -> "${this}$newlines"
+                is CharSequence -> "${this}$newlines"
+                else -> {
+                    spannableBuilder.append(newlines)
+                    null
+                }
             }
         }
-    }
 
     /**
      * [StyleSpan] 设置文本样式
@@ -237,7 +246,16 @@ class SpanDsl private constructor(
         align: CenterImageSpan.Align = CenterImageSpan.Align.CENTER,
         replaceRule: Any? = null,
     ) = singleSpan(replaceRule == null) {
-        spanImage(drawable, source, useTextViewSize, size, marginLeft, marginRight, align, replaceRule ?: globalReplaceRule)
+        spanImage(
+            drawable,
+            source,
+            useTextViewSize,
+            size,
+            marginLeft,
+            marginRight,
+            align,
+            replaceRule ?: globalReplaceRule
+        )
     }
 
     /**
@@ -256,7 +274,16 @@ class SpanDsl private constructor(
         align: CenterImageSpan.Align = CenterImageSpan.Align.CENTER,
         replaceRule: Any? = null,
     ) = singleSpan(replaceRule == null) {
-        spanImage(context, uri, useTextViewSize, size, marginLeft, marginRight, align, replaceRule ?: globalReplaceRule)
+        spanImage(
+            context,
+            uri,
+            useTextViewSize,
+            size,
+            marginLeft,
+            marginRight,
+            align,
+            replaceRule ?: globalReplaceRule
+        )
     }
 
     /**
@@ -275,7 +302,16 @@ class SpanDsl private constructor(
         align: CenterImageSpan.Align = CenterImageSpan.Align.CENTER,
         replaceRule: Any? = null,
     ) = singleSpan(replaceRule == null) {
-        spanImage(context, resourceId, useTextViewSize, size, marginLeft, marginRight, align, replaceRule ?: globalReplaceRule)
+        spanImage(
+            context,
+            resourceId,
+            useTextViewSize,
+            size,
+            marginLeft,
+            marginRight,
+            align,
+            replaceRule ?: globalReplaceRule
+        )
     }
 
     /**
@@ -294,7 +330,16 @@ class SpanDsl private constructor(
         align: CenterImageSpan.Align = CenterImageSpan.Align.CENTER,
         replaceRule: Any? = null,
     ) = singleSpan(replaceRule == null) {
-        spanImage(context, bitmap, useTextViewSize, size, marginLeft, marginRight, align, replaceRule ?: globalReplaceRule)
+        spanImage(
+            context,
+            bitmap,
+            useTextViewSize,
+            size,
+            marginLeft,
+            marginRight,
+            align,
+            replaceRule ?: globalReplaceRule
+        )
     }
 
     /**
@@ -315,7 +360,18 @@ class SpanDsl private constructor(
         requestOption: RequestOptions? = null,
         replaceRule: Any? = null,
     ) = singleSpan(replaceRule == null) {
-        spanGlide(view, url, useTextViewSize, size, marginLeft, marginRight, align, loopCount, requestOption, replaceRule ?: globalReplaceRule)
+        spanGlide(
+            view,
+            url,
+            useTextViewSize,
+            size,
+            marginLeft,
+            marginRight,
+            align,
+            loopCount,
+            requestOption,
+            replaceRule ?: globalReplaceRule
+        )
     }
 
     /**
@@ -482,6 +538,88 @@ class SpanDsl private constructor(
             replaceRule ?: globalReplaceRule,
             onClick
         )
+    }
+
+    fun Any?.quote(
+        colorString: String,
+        @IntRange(from = 0) stripeWidth: Int = 10,
+        @IntRange(from = 0) gapWidth: Int = 0
+    ) = singleSpan {
+        spanQuote(colorString.color, stripeWidth, gapWidth)
+    }
+
+    fun Any?.quote(
+        @ColorInt color: Int,
+        @Px @IntRange(from = 0) stripeWidth: Int = 10,
+        @Px @IntRange(from = 0) gapWidth: Int = 0
+    ) = singleSpan {
+        spanQuote(color, stripeWidth, gapWidth)
+    }
+
+    fun Any?.bullet(
+        colorString: String,
+        @Px @IntRange(from = 0) bulletRadius: Int,
+        @Px gapWidth: Int = 0,
+    ) = singleSpan {
+        spanBullet(colorString.color, bulletRadius, gapWidth)
+    }
+
+    fun Any?.bullet(
+        @ColorInt color: Int,
+        @Px @IntRange(from = 0) bulletRadius: Int,
+        @Px gapWidth: Int = 0,
+    ) = singleSpan {
+        spanBullet(color, bulletRadius, gapWidth)
+    }
+
+    fun Any?.alignment(
+        align: Layout.Alignment
+    ) = singleSpan {
+        spanAlignment(align)
+    }
+
+    fun Any?.lineBackground(
+        @ColorInt color: Int,
+    ) = singleSpan {
+        spanLineBackground(color)
+    }
+
+    fun Any?.lineBackground(
+        colorString: String,
+    ) = singleSpan {
+        spanLineBackground(colorString.color)
+    }
+
+    fun Any?.leadingMargin(
+        @IntRange(from = 1L) firstLines: Int,
+        @Px firstMargin: Int,
+        @Px restMargin: Int = 0
+    ) = singleSpan {
+        spanLeadingMargin(firstLines, firstMargin, restMargin)
+    }
+
+    fun Any?.lineHeight(
+        @Px @IntRange(from = 1L) height: Int
+    ) = singleSpan {
+        spanLineHeight(height)
+    }
+
+    fun Any?.imageParagraph(
+        bitmap: Bitmap,
+        @Px padding: Int = 0,
+        useTextViewSize: TextView? = null,
+        size: DrawableSize? = null
+    ) = singleSpan {
+        spanImageParagraph(bitmap, padding, useTextViewSize, size)
+    }
+
+    fun Any?.imageParagraph(
+        drawable: Drawable,
+        @Px padding: Int = 0,
+        useTextViewSize: TextView? = null,
+        size: DrawableSize? = null
+    ) = singleSpan {
+        spanImageParagraph(drawable, padding, useTextViewSize, size)
     }
 
     companion object {
