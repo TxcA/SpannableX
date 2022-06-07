@@ -211,8 +211,7 @@ public class JavaFragment extends Fragment {
                 if (s.toString().toUpperCase(Locale.ROOT).contains("T")) {
                     Span.create().text(s).suggestion(
                             requireContext(),
-                            new String[]{"TxcA", "https://github.com/TxcA/", "https://github.com/TxcA/SpannableX"},
-                            1);
+                            new String[]{"TxcA", "https://github.com/TxcA/", "https://github.com/TxcA/SpannableX"});
                 } else {
                     Span.removeSpans(s, SuggestionSpan.class);
                 }

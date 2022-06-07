@@ -221,7 +221,7 @@ class KotlinFragment : Fragment() {
                             "TxcA",
                             "https://github.com/TxcA/",
                             "https://github.com/TxcA/SpannableX",
-                        ), 1
+                        )
                     )
                 }
             } else it.removeSpans<SuggestionSpan>()
