@@ -56,6 +56,7 @@ TextView.text = spannable {
 
 ## 使用自定义Span
 对于未内置的`Span`或自定义的`Span`，可以使用`custom`方法快速集成及使用`CharacterStyle`&`ParagraphStyle`.
+
 - **kotlin**
   ``` kotlin
   TextView.text = spannable {
