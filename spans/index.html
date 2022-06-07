@@ -1,0 +1,740 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SpannableX使用说明">
+      
+      
+        <meta name="author" content="TxcA">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.2">
+    
+    
+      
+        <title>常用Span - SpannableX</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.5d38496d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+      
+    
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="txca" data-md-color-primary="white" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#span" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SpannableX" class="md-header__button md-logo" aria-label="SpannableX" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SpannableX
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              常用Span
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/TxcA/SpannableX/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SpannableX" class="md-nav__button md-logo" aria-label="SpannableX" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    SpannableX
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/TxcA/SpannableX/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        开始使用
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dsl/" class="md-nav__link">
+        Kotlin DSL
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chain/" class="md-nav__link">
+        Kotlin\Java 链式
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../replace/" class="md-nav__link">
+        替换规则
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/" class="md-nav__link">
+        辅助方法
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image/" class="md-nav__link">
+        图片加载
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          常用Span
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        常用Span
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#span" class="md-nav__link">
+    常用Span示例
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#span_1" class="md-nav__link">
+    完整Span说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#span_2" class="md-nav__link">
+    使用自定义Span
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    其它说明
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../change/" class="md-nav__link">
+        更新日志
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#span" class="md-nav__link">
+    常用Span示例
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#span_1" class="md-nav__link">
+    完整Span说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#span_2" class="md-nav__link">
+    使用自定义Span
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    其它说明
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/TxcA/SpannableX/edit/master/docs/spans.md" title="编辑此页" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>常用Span</h1>
+
+<p>为了方便使用，<strong><em>SpannableX</em></strong> 里二次封装了系统的常用Span。</p>
+<p>这些方法在 <em><a href="https://txca.github.io/SpannableX/dsl/">Kotlin DSL</a></em> 及 <em><a href="https://txca.github.io/SpannableX/chain/">Kotlin\Java 链式</a></em> 调用里，使用了同样的方法名及参数。</p>
+<h2 id="span">常用Span示例<a class="headerlink" href="#span" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">TextView</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spannable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="s">&quot;bold red text.&quot;</span><span class="p">.</span><span class="na">span</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="c1">// 参见下方`完整Span说明`的style方法</span><span class="w"></span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="n">style</span><span class="p">(</span><span class="n">Typeface</span><span class="p">.</span><span class="na">BOLD</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="c1">// 参见下方`完整Span说明`的color方法</span><span class="w"></span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="n">color</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="na">RED</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h2 id="span_1">完整Span说明<a class="headerlink" href="#span_1" title="Permanent link">&para;</a></h2>
+<p>所有的<code>CharacterStyle</code>方法，都带有 <strong><em>replaceRule</em></strong> 替换规则参数，对于替换规则详解，请查看 <strong><a href="https://txca.github.io/SpannableX/replace/">替换规则</a></strong> 说明。
+对于内置的<code>ParagraphStyle</code>，由于是对段落进行操作，都不支持<strong><em>replaceRule</em></strong> 替换规则参数。</p>
+<p>这里只列出方法名及效果说明，详细参数说明可查看<strong><a href="https://txca.github.io/SpannableX/api/"> API文档 </a></strong>或查看<strong><a href="https://github.com/TxcA/SpannableX/blob/master/app/src/main/java/com/itxca/sample/spannable/KotlinFragment.kt"> Sample </a></strong>。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>效果说明</th>
+<th>对应Span</th>
+<th>效果示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>style()</td>
+<td>设置文本样式</td>
+<td>StyleSpan</td>
+<td><img alt="" src="../res/spans/style.png" /></td>
+</tr>
+<tr>
+<td>typeface()</td>
+<td>设置字体样式</td>
+<td>TypefaceSpan</td>
+<td><img alt="" src="../res/spans/typeface.png" /></td>
+</tr>
+<tr>
+<td>textAppearance()</td>
+<td>设置字体效果</td>
+<td>TextAppearanceSpan</td>
+<td><img alt="" src="../res/spans/textAppearance.png" /></td>
+</tr>
+<tr>
+<td>color()</td>
+<td>文本颜色</td>
+<td>ForegroundColorSpan</td>
+<td><img alt="" src="../res/spans/color.png" /></td>
+</tr>
+<tr>
+<td>background()</td>
+<td>背景颜色</td>
+<td>BackgroundColorSpan</td>
+<td><img alt="" src="../res/spans/background.png" /></td>
+</tr>
+<tr>
+<td>image()</td>
+<td>图片</td>
+<td>CenterImageSpan</td>
+<td><img alt="" src="../res/spans/image.png" /></td>
+</tr>
+<tr>
+<td>glide()</td>
+<td>Glide加载图片</td>
+<td>GlideImageSpan</td>
+<td><img alt="" src="../res/spans/image.png" /></td>
+</tr>
+<tr>
+<td>scaleX()</td>
+<td>X轴文本缩放</td>
+<td>ScaleXSpan</td>
+<td><img alt="" src="../res/spans/scaleX.png" /></td>
+</tr>
+<tr>
+<td>maskFilter()</td>
+<td>文本蒙版效果</td>
+<td>MaskFilterSpan</td>
+<td><img alt="" src="../res/spans/blurMask.png" /></td>
+</tr>
+<tr>
+<td>blurMask()</td>
+<td>文本模糊滤镜蒙版效果</td>
+<td>BlurMaskFilter</td>
+<td><img alt="" src="../res/spans/blurMask.png" /></td>
+</tr>
+<tr>
+<td>superscript()</td>
+<td>文本上标</td>
+<td>SuperscriptSpan</td>
+<td><img alt="" src="../res/spans/superscript.png" /></td>
+</tr>
+<tr>
+<td>subscript()</td>
+<td>文本下标</td>
+<td>SubscriptSpan</td>
+<td><img alt="" src="../res/spans/subscript.png" /></td>
+</tr>
+<tr>
+<td>absoluteSize()</td>
+<td>文本绝对大小</td>
+<td>AbsoluteSizeSpan</td>
+<td><img alt="" src="../res/spans/absoluteSize.png" /></td>
+</tr>
+<tr>
+<td>relativeSize()</td>
+<td>文本相对大小</td>
+<td>RelativeSizeSpan</td>
+<td><img alt="" src="../res/spans/relativeSize.png" /></td>
+</tr>
+<tr>
+<td>strikethrough()</td>
+<td>删除线</td>
+<td>StrikethroughSpan</td>
+<td><img alt="" src="../res/spans/strikethrough.png" /></td>
+</tr>
+<tr>
+<td>underline()</td>
+<td>下划线</td>
+<td>UnderlineSpan</td>
+<td><img alt="" src="../res/spans/underline.png" /></td>
+</tr>
+<tr>
+<td>url()</td>
+<td>超链接</td>
+<td>URLSpan</td>
+<td><img alt="" src="../res/spans/url.png" /></td>
+</tr>
+<tr>
+<td>suggestion()</td>
+<td>文本输入提示</td>
+<td>SuggestionSpan</td>
+<td><img alt="" src="../res/spans/suggestion.png" /></td>
+</tr>
+<tr>
+<td>clickable()</td>
+<td>可点击文本</td>
+<td>SimpleClickableSpan</td>
+<td><img alt="" src="../res/spans/clickable.png" /></td>
+</tr>
+<tr>
+<td>margin()</td>
+<td>文本间距</td>
+<td>MarginSpan</td>
+<td><img alt="" src="../res/spans/margin.png" /></td>
+</tr>
+<tr>
+<td>quote()</td>
+<td>段落引用样式(段落前竖线标识)</td>
+<td>QuoteSpan<br>LegacyQuoteSpan</td>
+<td><img alt="" src="../res/spans/quote.png" /></td>
+</tr>
+<tr>
+<td>bullet()</td>
+<td>段落项目符号(段落前圆形标识)</td>
+<td>BulletSpan<br>LegacyBulletSpan</td>
+<td><img alt="" src="../res/spans/bullet.png" /></td>
+</tr>
+<tr>
+<td>alignment()</td>
+<td>段落对齐方式</td>
+<td>AlignmentSpan.Standard</td>
+<td><img alt="" src="../res/spans/alignment.png" /></td>
+</tr>
+<tr>
+<td>lineBackground()</td>
+<td>段落背景颜色</td>
+<td>LineBackgroundSpan.Standard<br>LegacyLineBackgroundSpan</td>
+<td><img alt="" src="../res/spans/lineBackground.png" /></td>
+</tr>
+<tr>
+<td>leadingMargin()</td>
+<td>段落文本缩进</td>
+<td>LeadingMarginSpan</td>
+<td><img alt="" src="../res/spans/leadingMargin.png" /></td>
+</tr>
+<tr>
+<td>lineHeight()</td>
+<td>段落行高</td>
+<td>LineHeightSpan.Standard<br>LegacyLineHeightSpan</td>
+<td><img alt="" src="../res/spans/lineHeight.png" /></td>
+</tr>
+<tr>
+<td>imageParagraph()</td>
+<td>段落图片</td>
+<td>ParagraphBitmapSpan<br>ParagraphDrawableSpan</td>
+<td><img alt="" src="../res/spans/imageParagraph.png" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="span_2">使用自定义Span<a class="headerlink" href="#span_2" title="Permanent link">&para;</a></h2>
+<p>对于未内置的<code>Span</code>或自定义的<code>Span</code>，可以使用<code>custom</code>方法快速集成及使用<code>CharacterStyle</code>&amp;<code>ParagraphStyle</code>.</p>
+<ul>
+<li>
+<p><strong>kotlin</strong>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">TextView</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spannable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">                 </span><span class="s">&quot;       custom&quot;</span><span class="p">.</span><span class="na">custom</span><span class="p">(</span><span class="n">ForegroundColorSpan</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="na">RED</span><span class="p">))</span><span class="w"></span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">                </span><span class="p">}</span><span class="w"></span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>java</strong>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">TextView</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="n">Span</span><span class="p">.</span><span class="na">create</span><span class="p">()</span><span class="w"></span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">                  </span><span class="p">.</span><span class="na">text</span><span class="p">(</span><span class="s">&quot;       .custom()&quot;</span><span class="p">).</span><span class="na">custom</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ForegroundColorSpan</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="na">RED</span><span class="p">))</span><span class="w"></span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">                  </span><span class="p">.</span><span class="na">spannable</span><span class="p">());</span><span class="w"></span>
+</code></pre></div></p>
+</li>
+</ul>
+<h2 id="_1">其它说明<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><strong>👉 本地、网络、Gif图片加载:</strong> <a href="https://txca.github.io/SpannableX/image/">图片加载</a></p>
+<p><strong>👉 替换规则(DSL、链式通用):</strong> <a href="https://txca.github.io/SpannableX/replace/">替换规则</a></p>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../image/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 图片加载" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              图片加载
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../change/" class="md-footer__link md-footer__link--next" aria-label="下一页: 更新日志" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              更新日志
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 - ~ TxcA
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.7f366e99.min.js"></script>
+      
+    
+  </body>
+</html>
