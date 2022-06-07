@@ -51,7 +51,6 @@ import com.itxca.spannablex.utils.drawableSize
 import com.itxca.spannablex.utils.textSizeInt
 import java.util.*
 
-
 //<editor-fold desc="日志">
 internal fun Throwable.logW(message: String? = null) {
     Log.w("SpannableX", "${message?.plus(" - ") ?: ""}${this.message ?: "unknown error"}")
@@ -689,4 +688,25 @@ internal fun CharSequence.spanImageParagraph(
 ): Spannable = setOrReplaceSpan(null) {
     ParagraphDrawableSpan(drawable, useTextViewSize?.textSizeInt?.drawableSize ?: size, padding)
 }
+
+/**
+ * 自定义字符样式
+ */
+internal fun <T : CharacterStyle> CharSequence.spanCustom(
+    style: T,
+    replaceRule: Any?
+): Spannable = setOrReplaceSpan(replaceRule) {
+    style
+}
+
+/**
+ * 自定义段落样式
+ */
+internal fun <T : ParagraphStyle> CharSequence.spanCustom(
+    style: T,
+    replaceRule: Any?
+): Spannable = setOrReplaceSpan(replaceRule) {
+    style
+}
+
 //</editor-fold>

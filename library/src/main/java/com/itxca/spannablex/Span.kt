@@ -27,6 +27,8 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.text.*
+import android.text.style.CharacterStyle
+import android.text.style.ParagraphStyle
 import android.text.style.SuggestionSpan
 import android.widget.TextView
 import androidx.annotation.*
@@ -555,6 +557,22 @@ class Span private constructor() {
         size: DrawableSize? = null
     ): Span = runOnSelf {
         spannableCache?.spanImageParagraph(drawable, padding, useTextViewSize, size)
+    }
+
+    @JvmOverloads
+    fun <T : CharacterStyle> custom(
+        style: T,
+        replaceRule: Any? = null,
+    ): Span = runOnSelf {
+        spannableCache?.spanCustom(style, replaceRule)
+    }
+
+    @JvmOverloads
+    fun <T : ParagraphStyle> custom(
+        style: T,
+        replaceRule: Any? = null,
+    ): Span = runOnSelf {
+        spannableCache?.spanCustom(style, replaceRule)
     }
 
     companion object {

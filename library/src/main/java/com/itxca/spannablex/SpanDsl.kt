@@ -622,6 +622,20 @@ class SpanDsl private constructor(
         spanImageParagraph(drawable, padding, useTextViewSize, size)
     }
 
+    fun<T: CharacterStyle> Any?.custom(
+        style:T,
+        replaceRule: Any? = null,
+    ) = singleSpan {
+        spanCustom(style, replaceRule)
+    }
+
+    fun<T: ParagraphStyle> Any?.custom(
+        style:T,
+        replaceRule: Any? = null,
+    ) = singleSpan {
+        spanCustom(style, replaceRule)
+    }
+
     companion object {
         /**
          * @see [SpanDsl]
