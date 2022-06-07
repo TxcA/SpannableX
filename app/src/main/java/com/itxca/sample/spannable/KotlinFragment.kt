@@ -130,8 +130,8 @@ class KotlinFragment : Fragment() {
                 marginLeft = 20.dp
             )
             newline()
-            "       custom".newline().custom(ForegroundColorSpan(Color.RED))
-            "       scaleX".newline().scaleX(2.0f, "X".toReplaceRule(matchIndex = 0))
+            "       scaleX".newline()
+                .scaleX(2.0f, "X".toReplaceRule(matchIndex = 0))
             "       blurMask".newline().blurMask(5.0f)
             "       superscript > Top".newline().superscript("Top")
             "       subscript > Bottom".newline().subscript("Bottom")
@@ -149,41 +149,53 @@ class KotlinFragment : Fragment() {
                 color(Color.BLUE, "// click")
                 underline("click")
             }
-            "       clickable".clickable(
+            "       clickable".newline().clickable(
                 color = Color.BLUE,
-                typeStyle = Typeface.BOLD_ITALIC
+                style = Typeface.BOLD_ITALIC
             ) { _, matchText ->
                 toast("点击: $matchText")
             }
-            newline()
+            "       margin tag text.".newline().margin(100.dp, replaceRule = " tag ")
+            "       custom".newline().custom(ForegroundColorSpan(Color.RED))
             "   }".span {
                 style(Typeface.ITALIC)
                 style(Typeface.BOLD)
                 color(Color.BLACK)
             }
-            newline()
-            newline()
+            newline(2)
 
             "       // 段落效果".span { style(Typeface.ITALIC); absoluteSize(12); color(Color.GRAY) }
             newline()
-            "`quote`\nA new line of `quote` and `lineBackground`.".span {
+            "`quote` & `lineBackground` & `lineHeight`.".span {
+                style(Typeface.BOLD_ITALIC, arrayOf("quote", "lineBackground", "lineHeight"))
+                color(Color.BLACK, arrayOf("quote", "lineBackground", "lineHeight"))
+
+                quote("#a0a0a0", 6.dp, 20.dp)
+                lineBackground("#eaeaea")
+                lineHeight(48.dp)
+            }
+
+            newline(2)
+            "`quote`\nA new line of `quote`.".span {
                 quote("#a0a0a0", 6.dp, 20.dp)
                 style(Typeface.BOLD_ITALIC, "quote")
                 color(Color.BLACK, "quote")
+            }
+
+            newline(2)
+            "`lineBackground`\nA new line of `lineBackground`.".span {
                 style(Typeface.BOLD_ITALIC, "lineBackground")
                 color(Color.BLACK, "lineBackground")
                 lineBackground("#eaeaea")
-                lineHeight(32.dp)
             }
-            newline()
-            newline()
+
+            newline(2)
             "`bullet`\nA new line of `bullet`.".span {
                 bullet("#8b00ff", 3.dp, 20.dp)
                 style(Typeface.BOLD_ITALIC, "bullet")
                 color(Color.BLACK, "bullet")
             }
-            newline()
-            newline()
+            newline(2)
             "`imageParagraph`\nA new line of `imageParagraph`.".span {
                 imageParagraph(
                     ContextCompat.getDrawable(
@@ -194,20 +206,24 @@ class KotlinFragment : Fragment() {
                 style(Typeface.BOLD_ITALIC, "imageParagraph")
                 color(Color.BLACK, "imageParagraph")
             }
-            newline()
-            newline()
+            newline(2)
             "`alignment`\nA new line of `alignment`.".span {
                 alignment(Layout.Alignment.ALIGN_OPPOSITE)
                 style(Typeface.BOLD_ITALIC, "alignment")
                 color(Color.BLACK, "alignment")
             }
-            newline()
-            newline()
+            newline(2)
             ("`leadingMargin`. SpannableX \uD83C\uDF8A Android Spannable 扩展，简单易用，" +
                     "支持Kotlin\\Java。Github: https://github.com/TxcA/SpannableX").span {
                 leadingMargin(1, 20.dp, 0)
                 style(Typeface.BOLD_ITALIC, "leadingMargin")
                 color(Color.BLACK, "leadingMargin")
+            }
+            newline(2)
+            "`lineHeight`\nA new line of `lineHeight`.".span {
+                lineHeight(32.dp)
+                style(Typeface.BOLD_ITALIC, "lineHeight")
+                color(Color.BLACK, "lineHeight")
             }
         }
         // 输入提示

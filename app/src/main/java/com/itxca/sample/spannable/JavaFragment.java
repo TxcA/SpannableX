@@ -26,6 +26,7 @@ import com.itxca.spannablex.annotation.ConversionUnit;
 import java.util.Locale;
 
 
+@SuppressWarnings("ConstantConditions")
 public class JavaFragment extends Fragment {
 
     public static JavaFragment newInstance() {
@@ -118,7 +119,6 @@ public class JavaFragment extends Fragment {
                 .glide(viewBinding.tvSample, "https://www.baidu.com/img/flexible/logo/pc/result.png", null, Span.drawableSize(24, ConversionUnit.SP))
                 .glide(viewBinding.tvSample, "https://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20191213/4d10811fc6b94254a122a14f28e231d7.gif", null, Span.drawableSize(48, ConversionUnit.SP), Span.dp(20))
                 .newline()
-                .text("       .custom()").newline().custom(new ForegroundColorSpan(Color.RED))
                 .text("       .scaleX()").newline().scaleX(2.0f, Span.toReplaceRule("X", false, 0))
                 .text("       .blurMask()").newline().blurMask(5.0f)
                 .text("       .superscript() > Top").newline().superscript("Top")
@@ -136,60 +136,78 @@ public class JavaFragment extends Fragment {
                 })
                 .color(Color.BLUE, "// click")
                 .underline("click")
-                .text("       .clickable()").clickable(
+                .text("       .clickable()").newline().clickable(
                         Color.BLUE,
                         null,
                         Typeface.BOLD_ITALIC,
                         null,
                         null,
-                        (v, matchText) ->
-                                Utils.toast(this, "点击: " + matchText)
+                        (v, matchText) -> Utils.toast(this, "点击: " + matchText)
                 )
-                .newline()
+                .text("       .margin() tag text.").newline().margin(Span.dp(100), null, " tag ")
+                .text("       .custom()").newline().custom(new ForegroundColorSpan(Color.RED))
                 .text("       .spannable()").style(Typeface.ITALIC)
                 .style(Typeface.BOLD)
                 .color(Color.BLACK)
                 .text(");")
-                .newline()
-                .newline()
+                .newline(2)
 
                 .text("       // 段落效果").style(Typeface.ITALIC).absoluteSize(12).color(Color.GRAY)
                 .newline()
-                .text("quote()\nA new line of quote() and lineBackground().")
+                .text("`quote` & `lineBackground` & `lineHeight`.")
+                .style(Typeface.BOLD_ITALIC, new String[]{"quote", "lineBackground", "lineHeight"})
+                .color(Color.BLACK, new String[]{"quote", "lineBackground", "lineHeight"})
                 .quote("#a0a0a0", Span.dp(6), Span.dp(20))
-                .style(Typeface.BOLD_ITALIC, Span.toReplaceRule("quote()"))
-                .color(Color.BLACK, Span.toReplaceRule("quote()"))
-                .style(Typeface.BOLD_ITALIC, Span.toReplaceRule("lineBackground()"))
-                .color(Color.BLACK, Span.toReplaceRule("lineBackground()"))
                 .lineBackground("#eaeaea")
-                .lineHeight(Span.dp(32))
-                .newline()
-                .newline()
-                .text("bullet()\nA new line of bullet().").bullet("#8b00ff", Span.dp(3), Span.dp(20))
-                .style(Typeface.BOLD_ITALIC, Span.toReplaceRule("bullet()"))
-                .color(Color.BLACK, Span.toReplaceRule("bullet()"))
-                .newline()
-                .newline()
-                .text("imageParagraph()\nA new line of imageParagraph().").imageParagraph(
-                        ContextCompat.getDrawable(requireContext(), R.mipmap.ic_launcher),
-                        Span.dp(16),
-                        null,
-                        Span.drawableSize(Span.dp(32))
+                .lineHeight(Span.dp(48))
+
+                .newline(2)
+                .text("`quote`\nA new line of `quote`.")
+                .quote("#a0a0a0", Span.dp(6), Span.dp(20))
+                .style(Typeface.BOLD_ITALIC, "quote")
+                .color(Color.BLACK, "quote")
+
+                .newline(2)
+                .text("`lineBackground`\nA new line of `lineBackground`.")
+                .style(Typeface.BOLD_ITALIC, "lineBackground")
+                .color(Color.BLACK, "lineBackground")
+                .lineBackground("#eaeaea")
+
+                .newline(2)
+                .text("`bullet`\nA new line of `bullet`.")
+                .bullet("#8b00ff", Span.dp(3), Span.dp(20))
+                .style(Typeface.BOLD_ITALIC, "bullet")
+                .color(Color.BLACK, "bullet")
+
+                .newline(2)
+                .text("`imageParagraph`\nA new line of `imageParagraph`.")
+                .imageParagraph(
+                        ContextCompat.getDrawable(
+                                requireContext(),
+                                R.mipmap.ic_launcher
+                        ), Span.dp(16), null, Span.drawableSize(Span.dp(32))
                 )
-                .style(Typeface.BOLD_ITALIC, Span.toReplaceRule("imageParagraph()"))
-                .color(Color.BLACK, Span.toReplaceRule("imageParagraph()"))
-                .newline()
-                .newline()
-                .text("alignment()\nA new line of alignment().").alignment(Layout.Alignment.ALIGN_OPPOSITE)
-                .style(Typeface.BOLD_ITALIC, Span.toReplaceRule("alignment()"))
-                .color(Color.BLACK, Span.toReplaceRule("alignment()"))
-                .newline()
-                .newline()
-                .text("leadingMargin(). SpannableX \uD83C\uDF8A Android Spannable 扩展，简单易用，" +
-                        "支持Kotlin\\Java。Github: https://github.com/TxcA/SpannableX"
-                ).leadingMargin(1, Span.dp(20), 0)
-                .style(Typeface.BOLD_ITALIC, Span.toReplaceRule("leadingMargin()"))
-                .color(Color.BLACK, Span.toReplaceRule("leadingMargin()"))
+                .style(Typeface.BOLD_ITALIC, "imageParagraph")
+                .color(Color.BLACK, "imageParagraph")
+
+                .newline(2)
+                .text("`alignment`\nA new line of `alignment`.")
+                .alignment(Layout.Alignment.ALIGN_OPPOSITE)
+                .style(Typeface.BOLD_ITALIC, "alignment")
+                .color(Color.BLACK, "alignment")
+
+                .newline(2)
+                .text("`leadingMargin`. SpannableX \uD83C\uDF8A Android Spannable 扩展，简单易用，" +
+                        "支持Kotlin\\Java。Github: https://github.com/TxcA/SpannableX")
+                .leadingMargin(1, Span.dp(20), 0)
+                .style(Typeface.BOLD_ITALIC, "leadingMargin")
+                .color(Color.BLACK, "leadingMargin")
+
+                .newline(2)
+                .text("`lineHeight`\nA new line of `lineHeight`.")
+                .lineHeight(Span.dp(32))
+                .style(Typeface.BOLD_ITALIC, "lineHeight")
+                .color(Color.BLACK, "lineHeight")
                 .spannable());
 
         viewBinding.et.addTextChangedListener(new TextWatcher() {
